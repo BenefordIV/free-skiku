@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhg6vm6m17yiv"]
+
+[ext_resource type="Texture2D" uid="uid://chaprcnlu75j0" path="res://assets/sprites/obsticle/tree.png" id="1_vebx4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccjwf"]
+size = Vector2(34, 100)
+
+[node name="Area2D" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vebx4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ccjwf")

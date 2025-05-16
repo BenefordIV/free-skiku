@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://clpor2yqvve5i"]
+
+[ext_resource type="Texture2D" uid="uid://mi3e8hbykhle" path="res://assets/sprites/obsticle/jump.png" id="1_4bfrp"]
+
+[sub_resource type="GDScript" id="GDScript_scdja"]
+script/source = "extends Area2D
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3bat"]
+size = Vector2(34, 24)
+
+[node name="jump" type="Area2D"]
+script = SubResource("GDScript_scdja")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4bfrp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b3bat")
