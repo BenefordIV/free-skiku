@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnqbcsivotrfm"]
+
+[ext_resource type="Script" uid="uid://bf8hos2orepoq" path="res://scenes/skiku_game/slope_tiles.gd" id="1_5fhym"]
+[ext_resource type="Script" uid="uid://bdrbfe2i2l5pc" path="res://scenes/obstacles/generators/item_generator.gd" id="2_4k12o"]
+[ext_resource type="PackedScene" uid="uid://d3kjjy8p2ess7" path="res://scenes/character/skiier.tscn" id="3_4k12o"]
+[ext_resource type="PackedScene" uid="uid://clpor2yqvve5i" path="res://scenes/obstacles/jump/jump.tscn" id="3_kkxbp"]
+[ext_resource type="PackedScene" uid="uid://t61yc0yb2nvo" path="res://scenes/obstacles/rock/rock.tscn" id="5_s0s43"]
+[ext_resource type="PackedScene" uid="uid://bhg6vm6m17yiv" path="res://scenes/obstacles/tree/tree.tscn" id="6_vbig2"]
+
+[node name="Game" type="Node2D"]
+
+[node name="skiier" parent="." instance=ExtResource("3_4k12o")]
+position = Vector2(2892, 13)
+
+[node name="Camera2D" type="Camera2D" parent="skiier"]
+
+[node name="SlopeTiles" type="Node2D" parent="."]
+script = ExtResource("1_5fhym")
+camera_node = NodePath("../skiier/Camera2D")
+
+[node name="Regions" type="Node2D" parent="SlopeTiles"]
+
+[node name="Generators" type="Node2D" parent="SlopeTiles"]
+
+[node name="JumpGenerator" type="Node2D" parent="SlopeTiles/Generators"]
+position = Vector2(12, 5)
+script = ExtResource("2_4k12o")
+spawn_scene = ExtResource("3_kkxbp")
+density = 1.58
+obj_w = 3
+obj_h = 3
+
+[node name="RockGenerator" type="Node2D" parent="SlopeTiles/Generators"]
+script = ExtResource("2_4k12o")
+spawn_scene = ExtResource("5_s0s43")
+
+[node name="Node2D" type="Node2D" parent="SlopeTiles/Generators"]
+script = ExtResource("2_4k12o")
+spawn_scene = ExtResource("6_vbig2")
