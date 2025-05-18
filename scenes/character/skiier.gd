@@ -4,6 +4,10 @@ enum SkiState {JUMPED, GROUND, CRASH, YETI}
 
 const DOWN : Vector2 = Vector2(0.0, 1.0)
 
+@onready var sprite_sheet: AnimatedSprite2D = $SpriteSheet
+@onready var ski_col: CollisionShape2D = $CollisionShape2D
+@onready var air_timer: Timer = $AirTimer
+
 var braking : bool
 
 var _d_index   : int: set = d_index_set
@@ -12,6 +16,7 @@ var _drag      : float: get = drag_get
 var _force : float
 var _state: SkiState = SkiState.GROUND
 var _miku_scale: float = 0.0
+var _player_mask: float = 1.0
 
 @export var free_move      : bool = true
 @export var dh_force : float = 500.0
@@ -31,7 +36,7 @@ const DIRECTION_LOOKUP := [Vector2(-1, 0), Vector2(-.867, .5), Vector2(-.5, .867
 func _ready() -> void:
 	self._direction = Vector2(1.0, 0.0)
 	self.velocity = Vector2(0.0, 0.0)
-	$AnimatedSprite2D.animation = "ski_anim"
+	sprite_sheet.animation = "ski_anim"
 	pass # Replace with function body.
 
 
@@ -42,10 +47,7 @@ func _physics_process(delta: float) -> void:
 	self.move_and_slide()
 	
 	for i in range(get_slide_collision_count()):
-		if get_slide_collision(i).get_collider() is ROCK:
-			self.rock_crash()
-		if get_slide_collision(i).get_collider() is TREE:
-			self.tree_crash()
+		handle_collision(get_slide_collision(i).get_collider())
 	
 	# Side friction
 	var vn := self.velocity.normalized().dot(_direction)
@@ -105,29 +107,66 @@ func d_index_set(value:int) -> void:
 #region sprite determination - movement
 func calc_sprite() -> void:
 	var s = SPRITE_INDEX[self._d_index]
-	$AnimatedSprite2D.frame = s[0]
-	$AnimatedSprite2D.flip_h = s[1]
+	sprite_sheet.frame = s[0]
+	sprite_sheet.flip_h = s[1]
 #endregion
 
 #region signal helpers
 func rock_crash() -> void:
-	$AnimatedSprite2D.animation = "crash_anim"
-	$AnimatedSprite2D.frame = 2
-	$AnimatedSprite2D.flip_h = false
+	sprite_sheet.animation = "crash_anim"
+	sprite_sheet.frame = 2
+	sprite_sheet.flip_h = false
 	change_state(SkiState.CRASH)
 	get_tree().paused = true
 #endregion
 
 #region signal helpers
-func tree_crash() -> void:
-	$AnimatedSprite2D.animation = "crash_anim"
-	$AnimatedSprite2D.frame = 0
-	$AnimatedSprite2D.flip_h = false
-	change_state(SkiState.CRASH)
-	get_tree().paused = true
+func tree_crash(col: Node2D) -> void:
+	if _state == SkiState.GROUND:
+		sprite_sheet.animation = "crash_anim"
+		sprite_sheet.frame = 2
+		sprite_sheet.flip_h = false
+		change_state(SkiState.CRASH)
+		get_tree().paused = true
+		
+#region end
 
+func handle_collision(col: Node2D) -> void:
+	if col is ROCK:
+		rock_crash()
+	
+	if col is TREE:
+		tree_crash(col)
+		
+	if col is JUMP:
+		ski_jump()
+
+func ski_jump() -> void:
+	change_state(SkiState.JUMPED)
+	ski_col.disabled = true
+	air_timer.start(1)
+	sprite_sheet.play("jump_anim")
+	sprite_sheet.scale.x = 1.5
+	sprite_sheet.scale.y = 1.5
+	
+	
+
+func restore_collision()-> void:
+	self.collision_layer = 1
+	change_state(SkiState.GROUND)
 #region state_change
 func change_state(new_state: SkiState) -> void:
 	if _state == new_state:
 		return
 #endregion
+
+
+func _on_air_timer_timeout() -> void:
+	sprite_sheet.stop()
+	sprite_sheet.scale.x = 1
+	sprite_sheet.scale.y = 1
+	change_state(SkiState.GROUND)
+	sprite_sheet.animation = "ski_anim"
+	calc_sprite()
+	ski_col.disabled = false
+	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d3kjjy8p2ess7"]
+[gd_scene load_steps=15 format=3 uid="uid://d3kjjy8p2ess7"]
 
 [ext_resource type="Script" uid="uid://mmuq4r4qk5hc" path="res://scenes/character/skiier.gd" id="1_b2blx"]
 [ext_resource type="Texture2D" uid="uid://baxdsb3x77k1q" path="res://assets/sprites/character/SkiFree-Miku.png" id="2_b2blx"]
@@ -26,14 +26,6 @@ region = Rect2(140, 0, 28, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3hbt8"]
 atlas = ExtResource("2_b2blx")
 region = Rect2(168, 0, 28, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jkr12"]
-atlas = ExtResource("2_b2blx")
-region = Rect2(196, 0, 28, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wjpo6"]
-atlas = ExtResource("2_b2blx")
-region = Rect2(224, 0, 28, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vthnn"]
 atlas = ExtResource("2_b2blx")
@@ -76,16 +68,10 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3hbt8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jkr12")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wjpo6")
 }],
 "loop": true,
 "name": &"jump_anim",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -111,10 +97,15 @@ size = Vector2(21, 30)
 [node name="skiier" type="CharacterBody2D"]
 script = ExtResource("1_b2blx")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="SpriteSheet" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ka2rh")
 animation = &"crash_anim"
+
+[node name="AirTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.5, 0)
 shape = SubResource("RectangleShape2D_ka2rh")
+
+[connection signal="timeout" from="AirTimer" to="." method="_on_air_timer_timeout"]
