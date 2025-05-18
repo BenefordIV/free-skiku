@@ -108,13 +108,21 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka2rh"]
 size = Vector2(21, 30)
 
-[node name="skiier" type="CharacterBody2D"]
+[node name="skiier" type="RigidBody2D"]
 script = ExtResource("1_b2blx")
+free_move = null
+dh_force = null
+running_drag = null
+braking_drag = null
+side_redirect = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ka2rh")
 animation = &"crash_anim"
+frame_progress = 0.582661
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-4.5, 0)
 shape = SubResource("RectangleShape2D_ka2rh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
