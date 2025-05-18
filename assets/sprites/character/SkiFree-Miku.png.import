@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c58scsp6vrec3"
-path="res://.godot/imported/skiku.png-7bc37043067d772d3c1987daa3ac0581.ctex"
+uid="uid://baxdsb3x77k1q"
+path="res://.godot/imported/SkiFree-Miku.png-ff0b702df017b1456970a7924a87cda4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/character/skiku.png"
-dest_files=["res://.godot/imported/skiku.png-7bc37043067d772d3c1987daa3ac0581.ctex"]
+source_file="res://assets/sprites/character/SkiFree-Miku.png"
+dest_files=["res://.godot/imported/SkiFree-Miku.png-ff0b702df017b1456970a7924a87cda4.ctex"]
 
 [params]
 

@@ -1,14 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhg6vm6m17yiv"]
 
-[ext_resource type="Texture2D" uid="uid://chaprcnlu75j0" path="res://assets/sprites/obsticle/tree.png" id="1_vebx4"]
+[ext_resource type="Script" uid="uid://to5p4adp44s5" path="res://scenes/obstacles/tree/tree.gd" id="1_ccjwf"]
+[ext_resource type="Texture2D" uid="uid://djs5xdi3ba10o" path="res://assets/sprites/obsticle/SkiFree-Tree-Big.png" id="1_vebx4"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ccjwf"]
-size = Vector2(34, 100)
-
-[node name="Area2D" type="Area2D"]
+[node name="Area2D" type="StaticBody2D"]
+script = ExtResource("1_ccjwf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_vebx4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ccjwf")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0.299999, 0.0999985)
+scale = Vector2(0.988281, 0.998047)
+polygon = PackedVector2Array(-9.41028, -11.1217, 0.708301, -33.1648, 7.79131, -11.1217, 15.8862, 23.9468, 6, 25, 5, 31, -5, 32, -4, 26, -16, 25)

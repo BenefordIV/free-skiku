@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chaprcnlu75j0"
-path="res://.godot/imported/tree.png-2dc18f15cf5cccc9c5a1766c6c99c03a.ctex"
+uid="uid://cr0e2nihquk1e"
+path="res://.godot/imported/SkiFree-Rock.png-f3fbae398f7f00bfa2d1f383a7d00adf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/obsticle/tree.png"
-dest_files=["res://.godot/imported/tree.png-2dc18f15cf5cccc9c5a1766c6c99c03a.ctex"]
+source_file="res://assets/sprites/obsticle/SkiFree-Rock.png"
+dest_files=["res://.godot/imported/SkiFree-Rock.png-f3fbae398f7f00bfa2d1f383a7d00adf.ctex"]
 
 [params]
 

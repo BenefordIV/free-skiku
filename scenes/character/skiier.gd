@@ -1,13 +1,17 @@
 extends CharacterBody2D
 
+enum SkiState {JUMPED, GROUND, CRASH, YETI}
+
 const DOWN : Vector2 = Vector2(0.0, 1.0)
 
 var braking : bool
 
-var d_index   : int: set = d_index_set
-var direction : Vector2: set = direction_set
-var drag      : float: get = drag_get
-var force : float
+var _d_index   : int: set = d_index_set
+var _direction : Vector2: set = direction_set
+var _drag      : float: get = drag_get
+var _force : float
+var _state: SkiState = SkiState.GROUND
+var _miku_scale: float = 0.0
 
 @export var free_move      : bool = true
 @export var dh_force : float = 500.0
@@ -16,28 +20,39 @@ var force : float
 @export var side_redirect  : float = 22.0
 @export var mass : float = 1.0
 
+#The index of the sprite. X = sprite index, Y = Flip Sprite
+const SPRITE_INDEX := [[3, true], [2, true], [1, true], [0, false], 
+							[1, false], [2, false], [3, false]]
+
 const DIRECTION_LOOKUP := [Vector2(-1, 0), Vector2(-.867, .5), Vector2(-.5, .867),
 							Vector2(0.0, 1.0), Vector2(.5, .867), Vector2(.867, .5), Vector2(1, 0)]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	self.direction = Vector2(1.0, 0.0)
+	self._direction = Vector2(1.0, 0.0)
 	self.velocity = Vector2(0.0, 0.0)
+	$AnimatedSprite2D.animation = "ski_anim"
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	var accel := self.force / self.mass
-	self.velocity = self.velocity + ((self.direction*accel) - (self.drag*self.velocity)) * delta
+	var accel := self._force / self.mass
+	self.velocity = self.velocity + ((self._direction*accel) - (self._drag*self.velocity)) * delta
 	self.move_and_slide()
 	
+	for i in range(get_slide_collision_count()):
+		if get_slide_collision(i).get_collider() is ROCK:
+			self.rock_crash()
+		if get_slide_collision(i).get_collider() is TREE:
+			self.tree_crash()
+	
 	# Side friction
-	var vn := self.velocity.normalized().dot(direction)
+	var vn := self.velocity.normalized().dot(_direction)
 	var amount_to_redirect := (self.side_redirect*delta)
 	var penalized_vel := self.velocity * (1.0 - vn)
 	var pmagnitude := (penalized_vel*amount_to_redirect).length()
-	var redirected := (penalized_vel * (1.0-amount_to_redirect)) + (direction*pmagnitude)
+	var redirected := (penalized_vel * (1.0-amount_to_redirect)) + (_direction*pmagnitude)
 	
 	self.velocity = (self.velocity * vn) + redirected
 
@@ -47,11 +62,11 @@ func _input(event:InputEvent) -> void:
 
 func handle_direction(dir:Vector2) -> void:
 	dir = dir.normalized()
-	self.d_index = self.calc_index(dir)
+	self._d_index = self.calc_index(dir)
 	if free_move:
-		self.direction = dir
+		self._direction = dir
 	else:
-		self.direction = DIRECTION_LOOKUP[self.d_index]
+		self._direction = DIRECTION_LOOKUP[self.d_index]
 
 func calc_index(dir:Vector2) -> int:
 	var i := 3
@@ -70,8 +85,8 @@ func direction_set(value:Vector2) -> void:
 		value.y = 0
 		if value.x == 0: value.x = 1.0 # Make sure it's not all 0
 		self.braking = true
-	direction = value
-	self.force = direction.dot(DOWN) * dh_force
+	_direction = value
+	self._force = _direction.dot(DOWN) * dh_force
 #endregion
 
 #region drag
@@ -82,6 +97,37 @@ func drag_get() -> float:
 
 #region index
 func d_index_set(value:int) -> void:
-	var old := d_index
-	d_index = value
+	var old := _d_index
+	_d_index = value
+	if old != value: self.calc_sprite()
+#endregion
+
+#region sprite determination - movement
+func calc_sprite() -> void:
+	var s = SPRITE_INDEX[self._d_index]
+	$AnimatedSprite2D.frame = s[0]
+	$AnimatedSprite2D.flip_h = s[1]
+#endregion
+
+#region signal helpers
+func rock_crash() -> void:
+	$AnimatedSprite2D.animation = "crash_anim"
+	$AnimatedSprite2D.frame = 2
+	$AnimatedSprite2D.flip_h = false
+	change_state(SkiState.CRASH)
+	get_tree().paused = true
+#endregion
+
+#region signal helpers
+func tree_crash() -> void:
+	$AnimatedSprite2D.animation = "crash_anim"
+	$AnimatedSprite2D.frame = 0
+	$AnimatedSprite2D.flip_h = false
+	change_state(SkiState.CRASH)
+	get_tree().paused = true
+
+#region state_change
+func change_state(new_state: SkiState) -> void:
+	if _state == new_state:
+		return
 #endregion

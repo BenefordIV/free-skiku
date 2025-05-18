@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqdplkdw2435b"
-path="res://.godot/imported/mound.png-b476851376902a2472fa73bd61903925.ctex"
+uid="uid://djs5xdi3ba10o"
+path="res://.godot/imported/SkiFree-Tree-Big.png-ddbe208f0e1cadddcd801b57bb855eee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/obsticle/mound.png"
-dest_files=["res://.godot/imported/mound.png-b476851376902a2472fa73bd61903925.ctex"]
+source_file="res://assets/sprites/obsticle/SkiFree-Tree-Big.png"
+dest_files=["res://.godot/imported/SkiFree-Tree-Big.png-ddbe208f0e1cadddcd801b57bb855eee.ctex"]
 
 [params]
 

@@ -9,11 +9,6 @@
 
 [node name="Game" type="Node2D"]
 
-[node name="skiier" parent="." instance=ExtResource("3_4k12o")]
-position = Vector2(2892, 13)
-
-[node name="Camera2D" type="Camera2D" parent="skiier"]
-
 [node name="SlopeTiles" type="Node2D" parent="."]
 script = ExtResource("1_5fhym")
 camera_node = NodePath("../skiier/Camera2D")
@@ -33,7 +28,14 @@ obj_h = 3
 [node name="RockGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("5_s0s43")
+density = 2.0
 
 [node name="Node2D" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("6_vbig2")
+density = 0.52
+
+[node name="skiier" parent="." instance=ExtResource("3_4k12o")]
+position = Vector2(2892, 13)
+
+[node name="Camera2D" type="Camera2D" parent="skiier"]

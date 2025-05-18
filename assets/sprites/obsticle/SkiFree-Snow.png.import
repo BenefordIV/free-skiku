@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://34uhf7mf6ej"
-path="res://.godot/imported/rock.png-693e3506b3911a176091d725802024a1.ctex"
+uid="uid://d1cd0op3tnjf"
+path="res://.godot/imported/SkiFree-Snow.png-02d522eca64a5dba6e02df41b7ddec52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/obsticle/rock.png"
-dest_files=["res://.godot/imported/rock.png-693e3506b3911a176091d725802024a1.ctex"]
+source_file="res://assets/sprites/obsticle/SkiFree-Snow.png"
+dest_files=["res://.godot/imported/SkiFree-Snow.png-02d522eca64a5dba6e02df41b7ddec52.ctex"]
 
 [params]
 

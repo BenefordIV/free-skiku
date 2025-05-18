@@ -1,15 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://t61yc0yb2nvo"]
+[gd_scene load_steps=4 format=3 uid="uid://t61yc0yb2nvo"]
 
-[ext_resource type="Texture2D" uid="uid://34uhf7mf6ej" path="res://assets/sprites/obsticle/rock.png" id="1_atjlv"]
+[ext_resource type="Texture2D" uid="uid://cr0e2nihquk1e" path="res://assets/sprites/obsticle/SkiFree-Rock.png" id="1_atjlv"]
+[ext_resource type="Script" uid="uid://d2nrbf3v34ica" path="res://scenes/obstacles/rock/rock.gd" id="1_v6l74"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v6l74"]
-size = Vector2(32, 17)
+size = Vector2(22, 10)
 
-[node name="rock" type="Area2D"]
+[node name="rock" type="StaticBody2D"]
+script = ExtResource("1_v6l74")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_atjlv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_v6l74")
