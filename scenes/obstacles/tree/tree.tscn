@@ -9,7 +9,10 @@ script = ExtResource("1_ccjwf")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_vebx4")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="GroundCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2(0.299999, 0.0999985)
 scale = Vector2(0.988281, 0.998047)
-polygon = PackedVector2Array(-9.41028, -11.1217, 0.708301, -33.1648, 7.79131, -11.1217, 15.8862, 23.9468, 6, 25, 5, 31, -5, 32, -4, 26, -16, 25)
+polygon = PackedVector2Array(-11.434, 3.90763, -0.303556, 3.90763, 10.8269, 3.90763, 15.8862, 23.9468, 6, 25, 5, 31, -5, 32, -4, 26, -16, 25)
+
+[node name="AirCollision" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(1, -31, -10, 3, 2.75726, 3, 10, 3)
