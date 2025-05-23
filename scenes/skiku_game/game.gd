@@ -3,7 +3,7 @@ extends Node2D
 const DUKE = preload("res://scenes/enemies/duke/duke.tscn")
 const MIKU = preload("res://scenes/character/skiier.tscn")
 const MARGIN: float = 70.0
-@onready var duke_speed_timer: Timer = $duke_speed_timer
+
 @onready var camera_2d: Camera2D = $skiier/Camera2D
 
 static var _vp_r: Rect2

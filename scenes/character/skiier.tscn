@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://drulx23ludkhv" path="res://scenes/character/skier_frames.tres" id="2_b2blx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka2rh"]
-size = Vector2(17, 23)
+size = Vector2(23, 33)
 
 [node name="skiier" type="CharacterBody2D"]
 script = ExtResource("1_b2blx")
@@ -12,14 +12,14 @@ script = ExtResource("1_b2blx")
 [node name="SpriteSheet" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_b2blx")
 animation = &"ski_anim"
-frame = 3
-frame_progress = 0.621724
+frame = 1
+frame_progress = 0.455208
 
 [node name="AirTimer" type="Timer" parent="."]
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2.5, 3.5)
+position = Vector2(-5.5, -1.5)
 shape = SubResource("RectangleShape2D_ka2rh")
 
 [connection signal="timeout" from="AirTimer" to="." method="_on_air_timer_timeout"]

@@ -59,6 +59,8 @@ func _physics_process(delta: float) -> void:
 	self.velocity = (self.velocity * vn) + redirected
 
 func _input(event:InputEvent) -> void:
+	if _state == SkiState.JUMPED:
+		return
 	if event is InputEventMouseMotion:
 		self.handle_direction(get_global_mouse_position() - self.global_position)
 
@@ -133,6 +135,7 @@ func tree_crash(col: Node2D) -> void:
 #region end
 
 func handle_collision(col: Node2D) -> void:
+	print("collision detected")
 	if col is ROCK:
 		rock_crash()
 	
@@ -173,6 +176,7 @@ func _on_air_timer_timeout() -> void:
 	
 
 func handle_duke_col(col: DUKE) -> void:
+	print("duke collide")
 	_state = SkiState.CRASH
 	col.play_eat_sprite()
 	sprite_sheet.hide()
