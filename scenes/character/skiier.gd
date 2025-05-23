@@ -1,8 +1,9 @@
 extends CharacterBody2D
-
+class_name MIKU
 enum SkiState {JUMPED, GROUND, CRASH, YETI}
 
 const DOWN : Vector2 = Vector2(0.0, 1.0)
+
 
 @onready var sprite_sheet: AnimatedSprite2D = $SpriteSheet
 @onready var ski_col: CollisionShape2D = $CollisionShape2D
@@ -38,7 +39,6 @@ func _ready() -> void:
 	self.velocity = Vector2(0.0, 0.0)
 	sprite_sheet.animation = "ski_anim"
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -113,22 +113,23 @@ func calc_sprite() -> void:
 
 #region signal helpers
 func rock_crash() -> void:
+	change_state(SkiState.CRASH)
 	sprite_sheet.animation = "crash_anim"
 	sprite_sheet.frame = 2
 	sprite_sheet.flip_h = false
-	change_state(SkiState.CRASH)
-	get_tree().paused = true
+	SignalHub.emit_on_miku_crash()
+	SignalHub.emit_game_over()
 #endregion
 
 #region signal helpers
 func tree_crash(col: Node2D) -> void:
 	if _state == SkiState.GROUND:
+		change_state(SkiState.CRASH)
 		sprite_sheet.animation = "crash_anim"
 		sprite_sheet.frame = 2
 		sprite_sheet.flip_h = false
-		change_state(SkiState.CRASH)
-		get_tree().paused = true
-		
+		SignalHub.emit_on_miku_crash()
+		SignalHub.emit_game_over()
 #region end
 
 func handle_collision(col: Node2D) -> void:
@@ -140,6 +141,9 @@ func handle_collision(col: Node2D) -> void:
 		
 	if col is JUMP:
 		ski_jump()
+	
+	if col is DUKE:
+		handle_duke_col(col)
 
 func ski_jump() -> void:
 	change_state(SkiState.JUMPED)
@@ -149,15 +153,12 @@ func ski_jump() -> void:
 	sprite_sheet.scale.x = 1.5
 	sprite_sheet.scale.y = 1.5
 	
-	
-
-func restore_collision()-> void:
-	self.collision_layer = 1
-	change_state(SkiState.GROUND)
 #region state_change
 func change_state(new_state: SkiState) -> void:
 	if _state == new_state:
 		return
+	else:
+		_state = new_state
 #endregion
 
 
@@ -170,3 +171,11 @@ func _on_air_timer_timeout() -> void:
 	calc_sprite()
 	ski_col.disabled = false
 	
+
+func handle_duke_col(col: DUKE) -> void:
+	_state = SkiState.CRASH
+	col.play_eat_sprite()
+	sprite_sheet.hide()
+	ski_col.disabled = true
+	SignalHub.emit_on_duke_eat()
+	SignalHub.emit_game_over()

@@ -1,0 +1,106 @@
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://ctkb40mtguqt"]
+
+[ext_resource type="Texture2D" uid="uid://dw5mtemx4f8b0" path="res://assets/sprites/enemies/duke/SkiFree-Duke-Death-AnimationPosition.png" id="1_47u7m"]
+[ext_resource type="Texture2D" uid="uid://b0sabrms08fbm" path="res://assets/sprites/enemies/duke/SkiFree-Duke-Fin.png" id="2_tvp2h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8ggr"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(0, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyupa"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(70, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_isjng"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(140, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd4ho"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(210, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyjeb"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(280, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ksin"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(350, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1a7mf"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(420, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_81jjq"]
+atlas = ExtResource("1_47u7m")
+region = Rect2(490, 0, 70, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47u7m"]
+atlas = ExtResource("2_tvp2h")
+region = Rect2(140, 0, 35, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tvp2h"]
+atlas = ExtResource("2_tvp2h")
+region = Rect2(175, 0, 35, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c4mv"]
+atlas = ExtResource("2_tvp2h")
+region = Rect2(70, 0, 35, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5wvi"]
+atlas = ExtResource("2_tvp2h")
+region = Rect2(105, 0, 35, 23)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8ggr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyupa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_isjng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd4ho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyjeb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ksin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1a7mf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81jjq")
+}],
+"loop": false,
+"name": &"duke_eat",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47u7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tvp2h")
+}],
+"loop": true,
+"name": &"duke_swim_front",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c4mv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5wvi")
+}],
+"loop": true,
+"name": &"duke_swim_sideways",
+"speed": 4.0
+}]

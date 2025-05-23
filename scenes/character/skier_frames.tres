@@ -1,0 +1,91 @@
+[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://drulx23ludkhv"]
+
+[ext_resource type="Texture2D" uid="uid://baxdsb3x77k1q" path="res://assets/sprites/character/SkiFree-Miku.png" id="1_l6h87"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxj16"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(364, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7ymi"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(280, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2blx"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(252, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rjbg"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(112, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2mmqj"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(140, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hbt8"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(168, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vthnn"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(84, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al85d"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(56, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cmtp4"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(28, 0, 28, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3a1c"]
+atlas = ExtResource("1_l6h87")
+region = Rect2(0, 0, 28, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxj16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7ymi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b2blx")
+}],
+"loop": true,
+"name": &"crash_anim",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rjbg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2mmqj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hbt8")
+}],
+"loop": true,
+"name": &"jump_anim",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vthnn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_al85d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cmtp4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3a1c")
+}],
+"loop": true,
+"name": &"ski_anim",
+"speed": 5.0
+}]
