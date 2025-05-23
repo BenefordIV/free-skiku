@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://clpor2yqvve5i" path="res://scenes/obstacles/jump/jump.tscn" id="3_kkxbp"]
 [ext_resource type="PackedScene" uid="uid://t61yc0yb2nvo" path="res://scenes/obstacles/rock/rock.tscn" id="5_s0s43"]
 [ext_resource type="PackedScene" uid="uid://bhg6vm6m17yiv" path="res://scenes/obstacles/tree/tree.tscn" id="6_vbig2"]
-[ext_resource type="PackedScene" uid="uid://b7edq1ytsypu2" path="res://scenes/game_ui/game_ui.tscn" id="8_3b6yy"]
+[ext_resource type="PackedScene" uid="uid://dmdkbf1g538oa" path="res://scenes/enemies/duke/duke.tscn" id="7_3b6yy"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_3b6yy")
@@ -43,13 +43,11 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
+[node name="Duke" parent="." instance=ExtResource("7_3b6yy")]
+
 [node name="skiier" parent="." groups=["Player"] instance=ExtResource("3_4k12o")]
-position = Vector2(2711, 0)
+position = Vector2(2644, 511)
 
 [node name="Camera2D" type="Camera2D" parent="skiier"]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="skiier"]
-
-[node name="game_ui" parent="skiier/CanvasLayer" instance=ExtResource("8_3b6yy")]
 
 [connection signal="timeout" from="duke_spawn_timer" to="." method="_on_duke_spawn_timer_timeout"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7edq1ytsypu2"]
+
+[ext_resource type="Script" uid="uid://b8pah11veqpp2" path="res://scenes/game_ui/game_ui.gd" id="1_1i64n"]
+[ext_resource type="FontFile" uid="uid://bm3gsjepunakr" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="1_sq0em"]
+
+[node name="game_ui" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1i64n")
+
+[node name="game_over_label" type="Label" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 414.0
+offset_top = 120.0
+offset_right = 853.0
+offset_bottom = 355.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_sq0em")
+theme_override_font_sizes/font_size = 75
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="restart_label" type="Label" parent="."]
+visible = false
+z_index = 2
+layout_mode = 0
+offset_left = 372.0
+offset_top = 824.0
+offset_right = 889.0
+offset_bottom = 903.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_sq0em")
+theme_override_font_sizes/font_size = 72
+text = "SPACE TO RESTART"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="reset_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="reset_timer" to="." method="_on_reset_timer_timeout"]

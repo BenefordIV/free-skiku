@@ -48,8 +48,8 @@ position = Vector2(2711, 0)
 
 [node name="Camera2D" type="Camera2D" parent="skiier"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="skiier"]
-
-[node name="game_ui" parent="skiier/CanvasLayer" instance=ExtResource("8_3b6yy")]
+[node name="game_ui" parent="skiier" instance=ExtResource("8_3b6yy")]
+offset_left = -2711.0
+offset_right = -2711.0
 
 [connection signal="timeout" from="duke_spawn_timer" to="." method="_on_duke_spawn_timer_timeout"]
