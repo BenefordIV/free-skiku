@@ -7,7 +7,7 @@
 size = Vector2(24.875, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qv6u"]
-size = Vector2(10, 15)
+size = Vector2(12, 15)
 
 [node name="Duke" type="CharacterBody2D"]
 script = ExtResource("1_1mbr4")
@@ -29,7 +29,7 @@ position = Vector2(2.5625, 5)
 shape = SubResource("RectangleShape2D_1mbr4")
 
 [node name="CollisionFront" type="CollisionShape2D" parent="."]
-position = Vector2(-13, 5.5)
+position = Vector2(-14, 5.5)
 shape = SubResource("RectangleShape2D_3qv6u")
 
 [connection signal="timeout" from="speed_timer" to="." method="_on_speed_timer_timeout"]

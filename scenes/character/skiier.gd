@@ -39,6 +39,9 @@ func _ready() -> void:
 	self.velocity = Vector2(0.0, 0.0)
 	sprite_sheet.animation = "ski_anim"
 	pass # Replace with function body.
+	
+func _enter_tree() -> void:
+	SignalHub.on_duke_eat.connect(_stop_miku)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -144,9 +147,6 @@ func handle_collision(col: Node2D) -> void:
 		
 	if col is JUMP:
 		ski_jump()
-	
-	if col is DUKE:
-		handle_duke_col(col)
 
 func ski_jump() -> void:
 	change_state(SkiState.JUMPED)
@@ -172,14 +172,9 @@ func _on_air_timer_timeout() -> void:
 	change_state(SkiState.GROUND)
 	sprite_sheet.animation = "ski_anim"
 	calc_sprite()
-	ski_col.disabled = false
-	
+	ski_col.disabled = false 	
 
-func handle_duke_col(col: DUKE) -> void:
-	print("duke collide")
-	_state = SkiState.CRASH
-	col.play_eat_sprite()
+func _stop_miku() -> void:
 	sprite_sheet.hide()
 	ski_col.disabled = true
-	SignalHub.emit_on_duke_eat()
-	SignalHub.emit_game_over()
+	_state = SkiState.CRASH
