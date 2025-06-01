@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://c3ulq6n1c03qv"]
+
+[ext_resource type="Script" uid="uid://ye5ca0udtm7" path="res://scenes/enemies/gg/gg_cat.gd" id="1_2f5uj"]
+[ext_resource type="Texture2D" uid="uid://c83un6x8uuhe0" path="res://assets/sprites/enemies/gg/SkiFree-GG-Snowboarder.png" id="1_mrgpk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f5uj"]
+atlas = ExtResource("1_mrgpk")
+region = Rect2(25, 0, 25, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_brwdh"]
+atlas = ExtResource("1_mrgpk")
+region = Rect2(75, 0, 25, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkiw3"]
+atlas = ExtResource("1_mrgpk")
+region = Rect2(50, 0, 25, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qjvod"]
+atlas = ExtResource("1_mrgpk")
+region = Rect2(100, 0, 25, 33)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dbrxh"]
+atlas = ExtResource("1_mrgpk")
+region = Rect2(0, 0, 25, 33)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_88518"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f5uj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_brwdh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkiw3")
+}],
+"loop": true,
+"name": &"gg_flip",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qjvod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dbrxh")
+}],
+"loop": false,
+"name": &"gg_snowboard",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_512po"]
+size = Vector2(27, 35.5)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_2f5uj")
+
+[node name="gg_sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_88518")
+animation = &"gg_snowboard"
+
+[node name="gg_shape" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.25)
+shape = SubResource("RectangleShape2D_512po")
+
+[node name="air_time" type="Timer" parent="."]
+one_shot = true
+
+[node name="disable_jump_timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="timeout" from="air_time" to="." method="_on_air_time_timeout"]
+[connection signal="timeout" from="disable_jump_timer" to="." method="_on_disable_jump_timer_timeout"]

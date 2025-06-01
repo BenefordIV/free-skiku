@@ -4,10 +4,12 @@ enum SkiState {JUMPED, GROUND, CRASH, YETI}
 
 const DOWN : Vector2 = Vector2(0.0, 1.0)
 
+var jump: Node2D
 
 @onready var sprite_sheet: AnimatedSprite2D = $SpriteSheet
 @onready var ski_col: CollisionShape2D = $CollisionShape2D
 @onready var air_timer: Timer = $AirTimer
+@onready var enable_jump_timer: Timer = $enable_jump_timer
 
 var braking : bool
 
@@ -42,6 +44,7 @@ func _ready() -> void:
 	
 func _enter_tree() -> void:
 	SignalHub.on_duke_eat.connect(_stop_miku)
+	SignalHub.on_gg_crash_with_miku.connect(_miku_crash)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -59,7 +62,8 @@ func _physics_process(delta: float) -> void:
 	var pmagnitude := (penalized_vel*amount_to_redirect).length()
 	var redirected := (penalized_vel * (1.0-amount_to_redirect)) + (_direction*pmagnitude)
 	
-	self.velocity = (self.velocity * vn) + redirected
+	if _state != SkiState.JUMPED:
+		self.velocity = (self.velocity * vn) + redirected
 
 func _input(event:InputEvent) -> void:
 	if _state == SkiState.JUMPED:
@@ -119,8 +123,8 @@ func calc_sprite() -> void:
 #region signal helpers
 func rock_crash() -> void:
 	change_state(SkiState.CRASH)
-	sprite_sheet.animation = "crash_anim"
-	sprite_sheet.frame = 2
+	sprite_sheet.animation = "full_crash"
+	sprite_sheet.frame = 0
 	sprite_sheet.flip_h = false
 	SignalHub.emit_on_miku_crash()
 	SignalHub.emit_game_over()
@@ -130,31 +134,35 @@ func rock_crash() -> void:
 func tree_crash(col: Node2D) -> void:
 	if _state == SkiState.GROUND:
 		change_state(SkiState.CRASH)
-		sprite_sheet.animation = "crash_anim"
-		sprite_sheet.frame = 2
+		sprite_sheet.animation = "full_crash"
+		sprite_sheet.frame = 0
 		sprite_sheet.flip_h = false
 		SignalHub.emit_on_miku_crash()
 		SignalHub.emit_game_over()
 #region end
 
 func handle_collision(col: Node2D) -> void:
-	print("collision detected")
-	if col is ROCK:
+	if col is ROCK and _state != SkiState.JUMPED:
 		rock_crash()
 	
 	if col is TREE:
 		tree_crash(col)
 		
 	if col is JUMP:
+		jump = col as JUMP
 		ski_jump()
+	
+	if col is GG:
+		_miku_crash()
 
 func ski_jump() -> void:
 	change_state(SkiState.JUMPED)
-	ski_col.disabled = true
 	air_timer.start(1)
 	sprite_sheet.play("jump_anim")
 	sprite_sheet.scale.x = 1.5
 	sprite_sheet.scale.y = 1.5
+	enable_jump_timer.start()
+	SignalHub.emit_on_miku_jump(jump)
 	
 #region state_change
 func change_state(new_state: SkiState) -> void:
@@ -172,9 +180,18 @@ func _on_air_timer_timeout() -> void:
 	change_state(SkiState.GROUND)
 	sprite_sheet.animation = "ski_anim"
 	calc_sprite()
-	ski_col.disabled = false 	
+	SignalHub.emit_on_miku_land()
 
 func _stop_miku() -> void:
 	sprite_sheet.hide()
 	ski_col.disabled = true
 	_state = SkiState.CRASH
+
+func _miku_crash() -> void:
+	sprite_sheet.play("crash_anim")
+	_state = SkiState.CRASH
+	SignalHub.emit_on_miku_crash()
+	SignalHub.emit_game_over()
+
+func _on_enable_jump_timer_timeout() -> void:
+	SignalHub.emit_on_enable_jump(jump) # Replace with function body.

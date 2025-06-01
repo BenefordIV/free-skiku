@@ -4,7 +4,7 @@ class_name DUKE
 enum DukeState {SLOW, FAST, EAT}
 
 @export var move_speed: float = 150.0
-@export var max_speed: float = 300.0
+@export var max_speed: float = 350.0
 @export var speed_incrase: float = 0.5
 
 
@@ -51,7 +51,6 @@ func handle_sprite_flip() -> void:
 func get_state_speed() -> float:
 	if _state == DukeState.FAST && move_speed <= max_speed:
 		move_speed += speed_incrase
-		print(move_speed)
 	return move_speed
 
 func change_state(new_state: DukeState) -> void:
@@ -85,10 +84,8 @@ func _on_duke_sheet_animation_finished() -> void:
 
 func handle_collision(col: Node2D) -> void:
 	if col is MIKU:
-		print("duke collide")
 		_state = DukeState.EAT
 		play_eat_sprite()
 		SignalHub.emit_on_duke_eat()
 		SignalHub.emit_game_over()
-		
 	return

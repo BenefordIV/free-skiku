@@ -19,6 +19,7 @@ config/icon="uid://bmlhaysnm4c15"
 
 SignalHub="*res://globals/SignalHub.gd"
 GameManager="*res://globals/GameManager.gd"
+ScoreManager="*res://globals/ScoreManager.gd"
 
 [display]
 
