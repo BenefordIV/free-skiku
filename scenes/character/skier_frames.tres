@@ -10,7 +10,7 @@ region = Rect2(364, 0, 28, 32)
 atlas = ExtResource("1_l6h87")
 region = Rect2(280, 0, 28, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b2blx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6h87"]
 atlas = ExtResource("1_l6h87")
 region = Rect2(252, 0, 28, 32)
 
@@ -50,12 +50,17 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j7ymi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b2blx")
 }],
 "loop": true,
 "name": &"crash_anim",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6h87")
+}],
+"loop": false,
+"name": &"full_crash",
 "speed": 2.0
 }, {
 "frames": [{

@@ -46,11 +46,11 @@ one_shot = true
 autostart = true
 
 [node name="gg_spawn_timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 10.0
 autostart = true
 
 [node name="skiier" parent="." groups=["Player"] instance=ExtResource("3_4k12o")]
-position = Vector2(2711, -37)
+position = Vector2(2711, 0)
 
 [node name="Camera2D" type="Camera2D" parent="skiier"]
 

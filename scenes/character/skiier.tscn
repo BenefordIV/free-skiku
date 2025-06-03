@@ -11,9 +11,7 @@ script = ExtResource("1_b2blx")
 
 [node name="SpriteSheet" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_b2blx")
-animation = &"ski_anim"
-frame = 1
-frame_progress = 0.455208
+animation = &"full_crash"
 
 [node name="AirTimer" type="Timer" parent="."]
 one_shot = true
@@ -22,4 +20,9 @@ one_shot = true
 position = Vector2(-5.5, -1.5)
 shape = SubResource("RectangleShape2D_ka2rh")
 
+[node name="enable_jump_timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="AirTimer" to="." method="_on_air_timer_timeout"]
+[connection signal="timeout" from="enable_jump_timer" to="." method="_on_enable_jump_timer_timeout"]

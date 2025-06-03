@@ -31,6 +31,9 @@ func _physics_process(delta: float) -> void:
 	velocity = determine_velocity()
 	move_and_slide()
 	handle_sprite_flip()
+	
+	for i in range(get_slide_collision_count()):
+		handle_collision(get_slide_collision(i).get_collider())
 
 func determine_velocity() -> Vector2:
 	return get_direction() * get_state_speed()
@@ -48,7 +51,6 @@ func handle_sprite_flip() -> void:
 func get_state_speed() -> float:
 	if _state == DukeState.FAST && move_speed <= max_speed:
 		move_speed += speed_incrase
-		print(move_speed)
 	return move_speed
 
 func change_state(new_state: DukeState) -> void:
@@ -79,3 +81,11 @@ func play_eat_sprite() -> void:
 func _on_duke_sheet_animation_finished() -> void:
 	if duke_sheet.animation == "duke_eat" && duke_sheet.frame == 7:
 		duke_sheet.frame = 0
+
+func handle_collision(col: Node2D) -> void:
+	if col is MIKU:
+		_state = DukeState.EAT
+		play_eat_sprite()
+		SignalHub.emit_on_duke_eat()
+		SignalHub.emit_game_over()
+	return
