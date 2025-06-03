@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 func _input(event:InputEvent) -> void:
 	if _state == SkiState.JUMPED:
 		return
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion && _state != SkiState.CRASH:
 		self.handle_direction(get_global_mouse_position() - self.global_position)
 
 func handle_direction(dir:Vector2) -> void:
@@ -190,6 +190,7 @@ func _stop_miku() -> void:
 func _miku_crash() -> void:
 	sprite_sheet.play("crash_anim")
 	_state = SkiState.CRASH
+	self.velocity = Vector2(0,0)
 	SignalHub.emit_on_miku_crash()
 	SignalHub.emit_game_over()
 
