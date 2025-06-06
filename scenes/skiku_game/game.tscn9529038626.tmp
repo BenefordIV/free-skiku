@@ -47,7 +47,7 @@ spawn_scene = ExtResource("6_vbig2")
 density = 0.52
 
 [node name="duke_spawn_timer" type="Timer" parent="."]
-wait_time = 8.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 
@@ -56,7 +56,6 @@ wait_time = 2.0
 autostart = true
 
 [node name="link_spawn_timer" type="Timer" parent="."]
-autostart = true
 
 [node name="skiier" parent="." groups=["Player"] instance=ExtResource("3_4k12o")]
 position = Vector2(2711, -37)
@@ -72,19 +71,18 @@ position = Vector2(669, 466)
 [node name="side_wall_l" type="Area2D" parent="skiier/Camera2D"]
 position = Vector2(-44, 21)
 collision_layer = 2
-collision_mask = 2
+collision_mask = 3
 
 [node name="side_wall_l_col" type="CollisionShape2D" parent="skiier/Camera2D/side_wall_l"]
-light_mask = 2
+visibility_layer = 2
 position = Vector2(-633, -15)
 shape = SubResource("RectangleShape2D_3b6yy")
 
 [node name="top_wall" type="Area2D" parent="skiier/Camera2D"]
 collision_layer = 2
-collision_mask = 2
 
 [node name="top_wall_col" type="CollisionShape2D" parent="skiier/Camera2D/top_wall"]
-light_mask = 2
+visibility_layer = 2
 position = Vector2(-9, -523)
 shape = SubResource("RectangleShape2D_1fkic")
 

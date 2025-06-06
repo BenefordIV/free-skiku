@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc0hxrvfh0xk"]
+
+[ext_resource type="Script" uid="uid://dyucao3gftkse" path="res://scenes/enemies/link/link.gd" id="1_0d5w7"]
+[ext_resource type="Texture2D" uid="uid://bc4g4hhfvotml" path="res://assets/sprites/enemies/link/SkiFree-Link.png" id="1_cq3s5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0d5w7"]
+atlas = ExtResource("1_cq3s5")
+region = Rect2(0, 0, 20, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_googw"]
+atlas = ExtResource("1_cq3s5")
+region = Rect2(20, 0, 20, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_amq7m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0d5w7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_googw")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q3sq"]
+size = Vector2(20, 14)
+
+[node name="link" type="CharacterBody2D"]
+position = Vector2(912, 343)
+script = ExtResource("1_0d5w7")
+
+[node name="link_sheet" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_amq7m")
+animation = &"fly"
+frame_progress = 0.575286
+
+[node name="link_col" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1q3sq")
+disabled = true
