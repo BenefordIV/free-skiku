@@ -27,17 +27,18 @@ func _physics_process(delta: float) -> void:
 
 	
 func _enter_tree() -> void:
-	SignalHub.flip_link_values.connect(flip_values)
+	SignalHub.on_flip_link_values.connect(flip_values)
 
 
 func get_offset() -> float:
 	return self.global_position.y - y_origin
 
 func flip_values(flip: bool) -> void:
+	print(flip)
 	if flip:
-		link_speed_x = +link_speed_x
+		self.velocity.x = 150.0
 		link_sheet.flip_h = true
 	else:
-		link_speed_x = -link_speed_x
+		self.velocity.x = link_speed_x
 		link_sheet.flip_h = false
 	

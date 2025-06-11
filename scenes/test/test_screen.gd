@@ -1,14 +1,10 @@
 extends Node2D
 
-const MARGIN = 70.0
-
 var new_link: LINK
 
 const LINK = preload("res://scenes/enemies/link/link.tscn")
 
-@onready var test_mark_u: Marker2D = $skiier/Camera2D/test_mark_u
-@onready var test_mark_l: Marker2D = $skiier/Camera2D/test_mark_l
-@onready var camera_2d: Camera2D = $skiier/Camera2D
+@onready var skiier: MIKU = $skiier
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,32 +15,28 @@ func _process(delta: float) -> void:
 	pass
 	
 
-func get_viewport_y() -> Vector2:
+func get_viewport_y(flip: bool) -> Vector2:
 	var pos_y: float = randf_range(
-		test_mark_u.global_position.y,
-		test_mark_l.global_position.y
+		skiier.camera.mark_u.global_position.y,
+		skiier.camera.mark_l.global_position.y
 	)
-	return Vector2(test_mark_u.global_position.x, pos_y)
+	
+	var pos_x: float = skiier.camera.mark_u.global_position.x
+	if flip:
+		pos_x = skiier.camera.mark_x_u.global_position.x
+		
+	print(pos_x)
+	return Vector2(pos_x, pos_y)
 
 func _on_timer_timeout() -> void:
-	var val = randi()
+	var val = randi_range(1, 2)
 	spawn_link(val)
 
 func spawn_link(val: int) -> void:
+	var flip = val % 2 != 0
 	if new_link == null:
 		new_link = LINK.instantiate()
-		new_link.position = get_viewport_y()
+		new_link.position = get_viewport_y(flip)
 		new_link.y_origin = new_link.position.y
-		#if the random int is divisible by 2, don't flip value
 		add_child(new_link)
-	
-
-
-func _on_side_wall_l_body_entered(body: Node2D) -> void:
-	if body is LINK:
-		body.queue_free()
-
-
-func _on_top_wall_body_entered(body: Node2D) -> void:
-	if body is LINK:
-		body.queue_free()
+		SignalHub.emit_flip_link_values(flip)
