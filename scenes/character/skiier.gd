@@ -6,6 +6,8 @@ const DOWN : Vector2 = Vector2(0.0, 1.0)
 
 var jump: Node2D
 
+@export var camera: GAME_CAMERA
+
 @onready var sprite_sheet: AnimatedSprite2D = $SpriteSheet
 @onready var ski_col: CollisionShape2D = $CollisionShape2D
 @onready var air_timer: Timer = $AirTimer

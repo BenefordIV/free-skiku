@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bnqbcsivotrfm"]
+[gd_scene load_steps=10 format=3 uid="uid://bnqbcsivotrfm"]
 
 [ext_resource type="Script" uid="uid://1d0g1t64j74g" path="res://scenes/skiku_game/game.gd" id="1_3b6yy"]
 [ext_resource type="Script" uid="uid://bf8hos2orepoq" path="res://scenes/skiku_game/slope_tiles.gd" id="1_5fhym"]
@@ -7,13 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://clpor2yqvve5i" path="res://scenes/obstacles/jump/jump.tscn" id="3_kkxbp"]
 [ext_resource type="PackedScene" uid="uid://t61yc0yb2nvo" path="res://scenes/obstacles/rock/rock.tscn" id="5_s0s43"]
 [ext_resource type="PackedScene" uid="uid://bhg6vm6m17yiv" path="res://scenes/obstacles/tree/tree.tscn" id="6_vbig2"]
+[ext_resource type="PackedScene" uid="uid://bevvbklc44j02" path="res://scenes/obstacles/mushroom/mushroom.tscn" id="7_1fkic"]
 [ext_resource type="PackedScene" uid="uid://b7edq1ytsypu2" path="res://scenes/game_ui/game_ui.tscn" id="8_3b6yy"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3b6yy"]
-size = Vector2(12.625, 1071.75)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fkic"]
-size = Vector2(1370, 10)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_3b6yy")
@@ -37,7 +32,7 @@ obj_h = 3
 [node name="RockGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("5_s0s43")
-density = 2.0
+density = 0.5
 
 [node name="TreeGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 z_index = 3
@@ -45,6 +40,10 @@ z_as_relative = false
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("6_vbig2")
 density = 0.52
+
+[node name="MushroomGenerator" type="Node2D" parent="SlopeTiles/Generators"]
+script = ExtResource("2_4k12o")
+spawn_scene = ExtResource("7_1fkic")
 
 [node name="duke_spawn_timer" type="Timer" parent="."]
 wait_time = 8.0
@@ -59,34 +58,10 @@ autostart = true
 autostart = true
 
 [node name="skiier" parent="." groups=["Player"] instance=ExtResource("3_4k12o")]
-position = Vector2(2711, -37)
+position = Vector2(2821, -390)
 
 [node name="Camera2D" type="Camera2D" parent="skiier"]
-
-[node name="marker_y_min" type="Marker2D" parent="skiier/Camera2D"]
-position = Vector2(680, 77)
-
-[node name="marker_y_max" type="Marker2D" parent="skiier/Camera2D"]
-position = Vector2(669, 466)
-
-[node name="side_wall_l" type="Area2D" parent="skiier/Camera2D"]
-position = Vector2(-44, 21)
-collision_layer = 2
-collision_mask = 2
-
-[node name="side_wall_l_col" type="CollisionShape2D" parent="skiier/Camera2D/side_wall_l"]
-light_mask = 2
-position = Vector2(-633, -15)
-shape = SubResource("RectangleShape2D_3b6yy")
-
-[node name="top_wall" type="Area2D" parent="skiier/Camera2D"]
-collision_layer = 2
-collision_mask = 2
-
-[node name="top_wall_col" type="CollisionShape2D" parent="skiier/Camera2D/top_wall"]
-light_mask = 2
-position = Vector2(-9, -523)
-shape = SubResource("RectangleShape2D_1fkic")
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="skiier"]
 
@@ -95,5 +70,3 @@ shape = SubResource("RectangleShape2D_1fkic")
 [connection signal="timeout" from="duke_spawn_timer" to="." method="_on_duke_spawn_timer_timeout"]
 [connection signal="timeout" from="gg_spawn_timer" to="." method="_on_gg_spawn_timer_timeout"]
 [connection signal="timeout" from="link_spawn_timer" to="." method="_on_link_spawn_timer_timeout"]
-[connection signal="body_entered" from="skiier/Camera2D/side_wall_l" to="." method="_on_side_wall_l_body_entered"]
-[connection signal="body_entered" from="skiier/Camera2D/top_wall" to="." method="_on_top_wall_body_entered"]

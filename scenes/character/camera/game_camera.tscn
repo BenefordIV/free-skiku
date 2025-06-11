@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://dk6n62gt2fnss"]
+
+[ext_resource type="Script" uid="uid://cwjf356tvqfr5" path="res://scenes/character/camera/game_camera.gd" id="1_nbcvl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b74gk"]
+size = Vector2(10.3125, 1087.88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbcvl"]
+size = Vector2(1453, 10.5313)
+
+[node name="game_camera" type="Camera2D" node_paths=PackedStringArray("mark_u", "mark_x_u", "mark_l")]
+script = ExtResource("1_nbcvl")
+mark_u = NodePath("test_mark_u")
+mark_x_u = NodePath("test_mark_u2")
+mark_l = NodePath("test_mark_l")
+
+[node name="test_mark_u" type="Marker2D" parent="."]
+position = Vector2(649, 84)
+
+[node name="test_mark_u2" type="Marker2D" parent="."]
+position = Vector2(-651, 84)
+
+[node name="test_mark_l" type="Marker2D" parent="."]
+position = Vector2(647, 449)
+
+[node name="side_wall_l" type="Area2D" parent="."]
+position = Vector2(-44, 21)
+collision_mask = 2
+
+[node name="side_wall_l_col" type="CollisionShape2D" parent="side_wall_l"]
+light_mask = 3
+visibility_layer = 2
+position = Vector2(-633, -15)
+shape = SubResource("RectangleShape2D_b74gk")
+
+[node name="side_wall_r" type="Area2D" parent="."]
+position = Vector2(1310, 27)
+collision_mask = 2
+
+[node name="side_wall_r_col" type="CollisionShape2D" parent="side_wall_r"]
+light_mask = 3
+visibility_layer = 2
+position = Vector2(-633, -19)
+shape = SubResource("RectangleShape2D_b74gk")
+
+[node name="top_wall" type="Area2D" parent="."]
+position = Vector2(634, -709)
+collision_mask = 2
+
+[node name="top_wall_col" type="CollisionShape2D" parent="top_wall"]
+light_mask = 3
+visibility_layer = 2
+position = Vector2(-636.5, 179.734)
+shape = SubResource("RectangleShape2D_nbcvl")
+
+[connection signal="body_entered" from="side_wall_l" to="." method="_on_side_wall_l_body_entered"]
+[connection signal="body_entered" from="side_wall_r" to="." method="_on_side_wall_r_body_entered"]
+[connection signal="body_entered" from="top_wall" to="." method="_on_top_wall_body_entered"]

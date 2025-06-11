@@ -10,7 +10,7 @@ signal on_gg_spawn
 signal on_enable_jump
 signal on_gg_crash
 signal on_gg_crash_with_miku
-signal flip_link_values
+signal on_flip_link_values
 
 func emit_on_duke_eat() -> void:
 	on_duke_eat.emit()
@@ -43,4 +43,4 @@ func emit_on_gg_crash_with_miku() -> void:
 	on_gg_crash_with_miku.emit()
 
 func emit_flip_link_values(flip: bool) -> void:
-	flip_link_values.emit()
+	on_flip_link_values.emit(flip)

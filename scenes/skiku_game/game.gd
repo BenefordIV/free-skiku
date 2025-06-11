@@ -5,8 +5,7 @@ const MIKU = preload("res://scenes/character/skiier.tscn")
 const GG = preload("res://scenes/enemies/gg/gg_cat.tscn")
 const LINK = preload("res://scenes/enemies/link/link.tscn")
 
-@onready var marker_y_max: Marker2D = $skiier/Camera2D/marker_y_max
-@onready var marker_y_min: Marker2D = $skiier/Camera2D/marker_y_min
+@onready var skiier: MIKU = $skiier
 
 const MARGIN: float = 70.0
 
@@ -41,7 +40,7 @@ func update_vp() -> void:
 
 #region determine camera pos
 func camera_pos_X() -> Vector2:
-	var cam_pos = camera_2d.get_screen_center_position()
+	var cam_pos = skiier.camera.get_screen_center_position()
 	var vp_half = get_viewport_rect().size * 0.5
 	var x_min = cam_pos.x + vp_half.x + MARGIN
 	var x_max = cam_pos.x - vp_half.x - MARGIN
@@ -51,12 +50,18 @@ func camera_pos_X() -> Vector2:
 	)
 	return Vector2(pos_x, (cam_pos.y - vp_half.y - MARGIN))
 
-func get_viewport_y() -> Vector2:
+func get_viewport_y(flip: bool) -> Vector2:
 	var pos_y: float = randf_range(
-		marker_y_min.global_position.y,
-		marker_y_max.global_position.y
+		skiier.camera.mark_u.global_position.y,
+		skiier.camera.mark_l.global_position.y
 	)
-	return Vector2(marker_y_min.global_position.x, pos_y)
+	
+	var pos_x: float = skiier.camera.mark_u.global_position.x
+	if flip:
+		pos_x = skiier.camera.mark_x_u.global_position.x
+		
+	print(pos_x)
+	return Vector2(pos_x, pos_y)
 
 #endregion
 
@@ -91,23 +96,14 @@ func stop_game() -> void:
 #region spawn link_bird
 func _on_link_spawn_timer_timeout() -> void:
 	if new_link == null:
-		spawn_link()
+		var val = randi_range(1, 2)
+		spawn_link(val)
 
-func spawn_link() -> void:
+func spawn_link(val: int) -> void:
+	var flip = val % 2 != 0
 	new_link = LINK.instantiate()
-	new_link.position = get_viewport_y()
+	new_link.position = get_viewport_y(flip)
 	new_link.y_origin = new_link.position.y
-	#if the random int is divisible by 2, don't flip value
 	add_child(new_link)
-
+	SignalHub.emit_flip_link_values(flip)
 #endregion
-
-
-func _on_side_wall_l_body_entered(body: Node2D) -> void:
-	if body is LINK:
-		body.queue_free()
-
-
-func _on_top_wall_body_entered(body: Node2D) -> void:
-	if body is LINK:
-		body.queue_free()

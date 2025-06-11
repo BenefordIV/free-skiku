@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3kjjy8p2ess7"]
+[gd_scene load_steps=5 format=3 uid="uid://d3kjjy8p2ess7"]
 
 [ext_resource type="Script" uid="uid://mmuq4r4qk5hc" path="res://scenes/character/skiier.gd" id="1_b2blx"]
 [ext_resource type="SpriteFrames" uid="uid://drulx23ludkhv" path="res://scenes/character/skier_frames.tres" id="2_b2blx"]
+[ext_resource type="PackedScene" uid="uid://dk6n62gt2fnss" path="res://scenes/character/camera/game_camera.tscn" id="3_d3a1c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka2rh"]
 size = Vector2(23, 33)
 
-[node name="skiier" type="CharacterBody2D"]
+[node name="skiier" type="CharacterBody2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_b2blx")
+camera = NodePath("game_camera")
 
 [node name="SpriteSheet" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("2_b2blx")
@@ -23,6 +25,8 @@ shape = SubResource("RectangleShape2D_ka2rh")
 [node name="enable_jump_timer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="game_camera" parent="." instance=ExtResource("3_d3a1c")]
 
 [connection signal="timeout" from="AirTimer" to="." method="_on_air_timer_timeout"]
 [connection signal="timeout" from="enable_jump_timer" to="." method="_on_enable_jump_timer_timeout"]
