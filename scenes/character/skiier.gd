@@ -12,6 +12,7 @@ var jump: Node2D
 @onready var ski_col: CollisionShape2D = $CollisionShape2D
 @onready var air_timer: Timer = $AirTimer
 @onready var enable_jump_timer: Timer = $enable_jump_timer
+@onready var jump_anim: AnimationPlayer = $jump_anim
 
 var braking : bool
 
@@ -157,13 +158,13 @@ func handle_collision(col: Node2D) -> void:
 	if col is GG:
 		_miku_crash()
 
+
 func ski_jump() -> void:
 	change_state(SkiState.JUMPED)
 	air_timer.start(1)
 	sprite_sheet.play("jump_anim")
-	sprite_sheet.scale.x = 1.5
-	sprite_sheet.scale.y = 1.5
 	enable_jump_timer.start()
+	jump_anim.play("jump")
 	SignalHub.emit_on_miku_jump(jump)
 	
 #region state_change
