@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3kjjy8p2ess7"]
+[gd_scene load_steps=8 format=3 uid="uid://d3kjjy8p2ess7"]
 
 [ext_resource type="Script" uid="uid://mmuq4r4qk5hc" path="res://scenes/character/skiier.gd" id="1_b2blx"]
 [ext_resource type="SpriteFrames" uid="uid://drulx23ludkhv" path="res://scenes/character/skier_frames.tres" id="2_b2blx"]
@@ -7,13 +7,45 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ka2rh"]
 size = Vector2(23, 33)
 
+[sub_resource type="Animation" id="Animation_d3a1c"]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.533333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1.75, 1.75), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_cmtp4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteSheet:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cmtp4"]
+_data = {
+&"RESET": SubResource("Animation_cmtp4"),
+&"jump": SubResource("Animation_d3a1c")
+}
+
 [node name="skiier" type="CharacterBody2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_b2blx")
 camera = NodePath("game_camera")
-
-[node name="SpriteSheet" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_b2blx")
-animation = &"full_crash"
 
 [node name="AirTimer" type="Timer" parent="."]
 one_shot = true
@@ -27,6 +59,17 @@ wait_time = 0.5
 one_shot = true
 
 [node name="game_camera" parent="." instance=ExtResource("3_d3a1c")]
+
+[node name="jump_anim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cmtp4")
+}
+
+[node name="SpriteSheet" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_b2blx")
+animation = &"jump_anim"
+frame = 1
+frame_progress = 0.965823
 
 [connection signal="timeout" from="AirTimer" to="." method="_on_air_timer_timeout"]
 [connection signal="timeout" from="enable_jump_timer" to="." method="_on_enable_jump_timer_timeout"]
