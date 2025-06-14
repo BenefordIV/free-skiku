@@ -4,7 +4,7 @@ class_name DUKE
 enum DukeState {SLOW, FAST, EAT}
 
 @export var move_speed: float = 150.0
-@export var max_speed: float = 300.0
+@export var max_speed: float = 325.0
 @export var speed_incrase: float = 0.5
 
 

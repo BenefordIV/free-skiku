@@ -13,7 +13,7 @@ config_version=5
 config/name="SkiKu"
 run/main_scene="uid://bnqbcsivotrfm"
 config/features=PackedStringArray("4.4", "Mobile")
-config/icon="uid://bmlhaysnm4c15"
+config/icon="uid://cha7d5helkpkj"
 
 [autoload]
 
@@ -38,4 +38,4 @@ restart={
 [rendering]
 
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.834614, 0.834614, 0.834614, 1)
+environment/defaults/default_clear_color=Color(0.804742, 0.804743, 0.804742, 1)

@@ -10,6 +10,8 @@ size = Vector2(24.875, 16)
 size = Vector2(12, 15)
 
 [node name="Duke" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_1mbr4")
 
 [node name="speed_timer" type="Timer" parent="."]
