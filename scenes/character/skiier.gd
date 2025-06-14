@@ -1,6 +1,6 @@
 extends CharacterBody2D
 class_name MIKU
-enum SkiState {JUMPED, GROUND, CRASH, YETI}
+enum SkiState {JUMPED, GROUND, CRASH, YETI, SLOW}
 
 const DOWN : Vector2 = Vector2(0.0, 1.0)
 
@@ -28,6 +28,7 @@ var _player_mask: float = 1.0
 @export var dh_force : float = 500.0
 @export var running_drag   : float = 1.48
 @export var braking_drag   : float = 4.5
+@export var slowing_drag : float = 10.0
 @export var side_redirect  : float = 22.0
 @export var mass : float = 1.0
 
@@ -105,6 +106,8 @@ func direction_set(value:Vector2) -> void:
 
 #region drag
 func drag_get() -> float:
+	if _state == SkiState.SLOW:
+		return self.slowing_drag
 	if self.braking: return self.braking_drag
 	return self.running_drag
 #endregion

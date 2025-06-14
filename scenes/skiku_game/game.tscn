@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bnqbcsivotrfm"]
+[gd_scene load_steps=11 format=3 uid="uid://bnqbcsivotrfm"]
 
 [ext_resource type="Script" uid="uid://1d0g1t64j74g" path="res://scenes/skiku_game/game.gd" id="1_3b6yy"]
 [ext_resource type="Script" uid="uid://bf8hos2orepoq" path="res://scenes/skiku_game/slope_tiles.gd" id="1_5fhym"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://t61yc0yb2nvo" path="res://scenes/obstacles/rock/rock.tscn" id="5_s0s43"]
 [ext_resource type="PackedScene" uid="uid://bhg6vm6m17yiv" path="res://scenes/obstacles/tree/tree.tscn" id="6_vbig2"]
 [ext_resource type="PackedScene" uid="uid://bevvbklc44j02" path="res://scenes/obstacles/mushroom/mushroom.tscn" id="7_1fkic"]
+[ext_resource type="PackedScene" uid="uid://cetyoeu3j8q3i" path="res://scenes/obstacles/snow_mound/snow_mounds.tscn" id="8_2qy0d"]
 [ext_resource type="PackedScene" uid="uid://b7edq1ytsypu2" path="res://scenes/game_ui/game_ui.tscn" id="8_3b6yy"]
 
 [node name="Game" type="Node2D"]
@@ -25,25 +26,26 @@ camera_node = NodePath("../skiier/Camera2D")
 position = Vector2(12, 5)
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("3_kkxbp")
-density = 1.58
+density = 1.5
 obj_w = 3
 obj_h = 3
 
 [node name="RockGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("5_s0s43")
-density = 0.5
+density = 1.0
 
 [node name="TreeGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 z_index = 3
 z_as_relative = false
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("6_vbig2")
-density = 0.52
+density = 1.0
 
 [node name="MushroomGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("7_1fkic")
+density = 0.5
 
 [node name="duke_spawn_timer" type="Timer" parent="."]
 wait_time = 8.0
@@ -66,6 +68,11 @@ visible = false
 [node name="CanvasLayer" type="CanvasLayer" parent="skiier"]
 
 [node name="game_ui" parent="skiier/CanvasLayer" instance=ExtResource("8_3b6yy")]
+
+[node name="SlowdownGenerators" type="Node2D" parent="."]
+script = ExtResource("2_4k12o")
+spawn_scene = ExtResource("8_2qy0d")
+density = 0.5
 
 [connection signal="timeout" from="duke_spawn_timer" to="." method="_on_duke_spawn_timer_timeout"]
 [connection signal="timeout" from="gg_spawn_timer" to="." method="_on_gg_spawn_timer_timeout"]

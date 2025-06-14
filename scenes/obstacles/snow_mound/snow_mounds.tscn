@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cetyoeu3j8q3i"]
+
+[ext_resource type="Texture2D" uid="uid://d1cd0op3tnjf" path="res://assets/sprites/obsticle/SkiFree-Snow.png" id="1_7nqxr"]
+[ext_resource type="Script" uid="uid://cw3v8li73ca0v" path="res://scenes/obstacles/snow_mound/snow_mounds.gd" id="1_xysvw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xysvw"]
+size = Vector2(65, 33)
+
+[node name="snow_mounds" type="Area2D"]
+script = ExtResource("1_xysvw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_7nqxr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_xysvw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
