@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is MIKU:
-		if body._state != body.SkiState.JUMPED:
+		if body._state in [body.SkiState.GROUND, body.SkiState.SLIDING, body.SkiState.FALLING]:
 			body.change_state(body.SkiState.SLOW)
 	if body is GG:
 		body._set_gg_y_velocity(body.y_velocity_slow)
