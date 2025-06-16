@@ -47,6 +47,11 @@ script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("7_1fkic")
 density = 0.5
 
+[node name="SnowMoundGenerator" type="Node2D" parent="SlopeTiles/Generators"]
+script = ExtResource("2_4k12o")
+spawn_scene = ExtResource("8_2qy0d")
+density = 1.0
+
 [node name="duke_spawn_timer" type="Timer" parent="."]
 wait_time = 8.0
 one_shot = true
