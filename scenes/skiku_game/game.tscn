@@ -26,31 +26,31 @@ camera_node = NodePath("../skiier/Camera2D")
 position = Vector2(12, 5)
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("3_kkxbp")
-density = 1.5
+density = 0.5
 obj_w = 3
 obj_h = 3
 
 [node name="RockGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("5_s0s43")
-density = 1.0
+density = 0.5
 
 [node name="TreeGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 z_index = 3
 z_as_relative = false
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("6_vbig2")
-density = 1.0
+density = 0.5
 
 [node name="MushroomGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("7_1fkic")
-density = 0.5
+density = 0.15
 
 [node name="SnowMoundGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("8_2qy0d")
-density = 1.0
+density = 0.1
 
 [node name="duke_spawn_timer" type="Timer" parent="."]
 wait_time = 8.0
