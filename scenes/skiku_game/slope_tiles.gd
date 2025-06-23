@@ -3,7 +3,7 @@ extends Node2D
 
 @export var tile_size := 16.0
 @export var tiles_across := 512
-@export var tiles_down := 64
+@export var tiles_down := 512
 @export var camera_node : NodePath
 
 #denotes how many tiles are generated in the Y-Axis

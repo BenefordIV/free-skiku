@@ -68,6 +68,10 @@ func _physics_process(delta: float) -> void:
 	
 	if _state != SkiState.JUMPED:
 		self.velocity = (self.velocity * vn) + redirected
+		
+	if self.position.x <= 0:
+		SignalHub.emit_on_miku_crash()
+		SignalHub.emit_game_over()
 
 func _input(event:InputEvent) -> void:
 	if _state == SkiState.JUMPED:
