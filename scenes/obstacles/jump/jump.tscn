@@ -1,17 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://clpor2yqvve5i"]
 
-[ext_resource type="Texture2D" uid="uid://mi3e8hbykhle" path="res://assets/sprites/obsticle/jump.png" id="1_4bfrp"]
 [ext_resource type="Script" uid="uid://cgmbo8minyfmm" path="res://scenes/obstacles/jump/jump.gd" id="1_73of8"]
+[ext_resource type="Texture2D" uid="uid://xi0my62fap7t" path="res://assets/sprites/obsticle/SkiFree-Checkpoint.png" id="2_73of8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3bat"]
-size = Vector2(34, 3)
+size = Vector2(51, 1.5)
 
 [node name="jump" type="StaticBody2D"]
 script = ExtResource("1_73of8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_4bfrp")
+position = Vector2(7.5, 3.75)
+scale = Vector2(1.59375, 1.8125)
+texture = ExtResource("2_73of8")
 
 [node name="jumpTakeoffPoint" type="CollisionShape2D" parent="."]
-position = Vector2(0, -10.5)
+position = Vector2(7.5, -4.25)
 shape = SubResource("RectangleShape2D_b3bat")

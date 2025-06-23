@@ -1,5 +1,7 @@
 extends Control
 
+enum GameState {PLAYING, PAUSED}
+
 var _can_press: bool = false
 
 @onready var game_over_label: Label = $game_over_label
@@ -8,13 +10,16 @@ var _can_press: bool = false
 @onready var current_score_label: Label = $current_score_label
 @onready var high_score_label: Label = $high_score_label
 @onready var high_score_label_2: Label = $high_score_label_2
+@onready var paused_label: Label = $paused_label
 
 
 var _elapsed_time: float = 0.0
 var _target_time: float = 2.0
 var _score: float = 0.0
+var _state: GameState
 
 func _ready() -> void:
+	_state = GameState.PLAYING
 	high_score_label_2.text = "High Score:%06d" % ScoreManager.high_score
 	pass
 
@@ -28,6 +33,19 @@ func _process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if _can_press and event.is_action_pressed("restart"):
 		GameManager.load_game_scene()
+		pass
+		
+	if _state == GameState.PLAYING and event.is_action_pressed("pause"):
+		paused_label.show()
+		_state = GameState.PAUSED
+		get_tree().paused = true
+		pass
+	
+	elif _state == GameState.PAUSED and event.is_action_pressed("pause"):
+		paused_label.hide()
+		_state = GameState.PLAYING
+		get_tree().paused = false
+		pass
 
 func _enter_tree() -> void:
 	SignalHub.on_duke_eat.connect(handle_game_over)

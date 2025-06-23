@@ -26,7 +26,7 @@ camera_node = NodePath("../skiier/Camera2D")
 position = Vector2(12, 5)
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("3_kkxbp")
-density = 1.5
+density = 0.66
 obj_w = 3
 obj_h = 3
 
@@ -45,12 +45,12 @@ density = 1.0
 [node name="MushroomGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("7_1fkic")
-density = 0.5
+density = 0.15
 
 [node name="SnowMoundGenerator" type="Node2D" parent="SlopeTiles/Generators"]
 script = ExtResource("2_4k12o")
 spawn_scene = ExtResource("8_2qy0d")
-density = 1.0
+density = 0.1
 
 [node name="duke_spawn_timer" type="Timer" parent="."]
 wait_time = 8.0
@@ -65,10 +65,15 @@ autostart = true
 autostart = true
 
 [node name="skiier" parent="." groups=["Player"] instance=ExtResource("3_4k12o")]
-position = Vector2(2821, -390)
+position = Vector2(8222, -309)
 
 [node name="Camera2D" type="Camera2D" parent="skiier"]
 visible = false
+limit_left = 0
+limit_top = -1099
+limit_right = 655360
+limit_bottom = 0
+editor_draw_limits = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="skiier"]
 

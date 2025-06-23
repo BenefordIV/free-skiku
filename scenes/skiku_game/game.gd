@@ -1,5 +1,7 @@
 extends Node2D
 
+enum GAME_STATE {PLAYING, PAUSED}
+
 const DUKE = preload("res://scenes/enemies/duke/duke.tscn")
 const MIKU = preload("res://scenes/character/skiier.tscn")
 const GG = preload("res://scenes/enemies/gg/gg_cat.tscn")
@@ -11,6 +13,7 @@ const MARGIN: float = 70.0
 
 var new_gg: GG
 var new_link: LINK
+var _state: GAME_STATE = GAME_STATE.PLAYING
 
 @onready var camera_2d: Camera2D = $skiier/Camera2D
 
