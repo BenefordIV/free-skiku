@@ -65,7 +65,7 @@ autostart = true
 autostart = true
 
 [node name="skiier" parent="." groups=["Player"] instance=ExtResource("3_4k12o")]
-position = Vector2(8222, -309)
+position = Vector2(4050, -404)
 
 [node name="Camera2D" type="Camera2D" parent="skiier"]
 visible = false
