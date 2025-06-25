@@ -63,7 +63,6 @@ one_shot = true
 [node name="game_camera" parent="." instance=ExtResource("3_d3a1c")]
 limit_left = 0
 limit_right = 8192
-limit_bottom = 100000000
 editor_draw_limits = true
 
 [node name="jump_anim" type="AnimationPlayer" parent="."]
