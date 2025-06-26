@@ -26,6 +26,9 @@ func _ready() -> void:
 	
 	pass
 	
+func _enter_tree() -> void:
+	SignalHub.on_gg_flip.connect(do_gg_flip)
+	
 func _physics_process(delta: float) -> void:
 	determine_direction()
 	if _state == GgState.SCREEN_LEFT:
@@ -54,10 +57,12 @@ func determine_direction() -> void:
 	else:
 		change_state(GgState.SCREEN_RIGHT) 
 
+func do_gg_flip(j: Node2D) -> void:
+	jump = j
+	change_state(GgState.JUMPING)
+	pass
+
 func handle_collision(col: Node2D) -> void:
-	if col is JUMP:
-		jump = col
-		change_state(GgState.JUMPING)
 	if col is ROCK || col is TREE:
 		SignalHub.emit_on_gg_crash(self)
 	if col is MIKU:

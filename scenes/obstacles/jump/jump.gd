@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Area2D
 
 class_name JUMP
 
@@ -19,3 +19,13 @@ func disable_jumps(jump: JUMP) -> void:
 func enable_jumps(jump: JUMP) -> void:
 	jump.jump_takeoff_point.disabled = false
 	
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is MIKU:
+		SignalHub.emit_on_miku_flip(self)
+		pass # Replace with function body.
+
+	if body is GG:
+		SignalHub.emit_on_gg_flip(self)
+		pass

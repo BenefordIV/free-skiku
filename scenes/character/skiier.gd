@@ -49,6 +49,7 @@ func _ready() -> void:
 func _enter_tree() -> void:
 	SignalHub.on_duke_eat.connect(_stop_miku)
 	SignalHub.on_gg_crash_with_miku.connect(_miku_crash)
+	SignalHub.on_miku_flip.connect(ski_jump)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -157,16 +158,13 @@ func handle_collision(col: Node2D) -> void:
 	
 	if col is TREE:
 		tree_crash(col)
-		
-	if col is JUMP:
-		jump = col as JUMP
-		ski_jump()
 	
 	if col is GG:
 		_miku_crash()
 
 
-func ski_jump() -> void:
+func ski_jump(node: Node2D) -> void:
+	jump = node
 	change_state(SkiState.JUMPED)
 	air_timer.start(1)
 	sprite_sheet.play("jump_anim")

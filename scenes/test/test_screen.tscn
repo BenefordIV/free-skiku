@@ -14,7 +14,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="jump" parent="." instance=ExtResource("3_7774k")]
-position = Vector2(503, 474)
+position = Vector2(512, 445)
 
 [node name="skiier" parent="." instance=ExtResource("2_p07fl")]
 position = Vector2(588, 329)
