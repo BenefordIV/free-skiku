@@ -1,6 +1,6 @@
 extends Control
 
-enum GameState {PLAYING, PAUSED}
+enum GameState {PLAYING, PAUSED, GAMEOVER}
 
 var _can_press: bool = false
 
@@ -61,6 +61,7 @@ func handle_game_over() -> void:
 	game_over_label.show()
 	reset_timer.start()
 	showHighScore()
+	_state = GameState.GAMEOVER
 
 func _on_reset_timer_timeout() -> void:
 	press_space_label.show()
