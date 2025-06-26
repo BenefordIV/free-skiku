@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b3bat"]
 size = Vector2(51, 1.5)
 
-[node name="jump" type="StaticBody2D"]
+[node name="jump" type="Area2D"]
 script = ExtResource("1_73of8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -15,5 +15,7 @@ scale = Vector2(1.59375, 1.8125)
 texture = ExtResource("2_73of8")
 
 [node name="jumpTakeoffPoint" type="CollisionShape2D" parent="."]
-position = Vector2(7.5, -4.25)
+position = Vector2(7, -6)
 shape = SubResource("RectangleShape2D_b3bat")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
