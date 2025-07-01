@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bg7p4jcwg80vd"]
+
+[ext_resource type="Script" uid="uid://yjxvkvujrbjc" path="res://chair_lift.gd" id="1_y188m"]
+[ext_resource type="PackedScene" uid="uid://b4gs4ybpb17ou" path="res://scenes/obstacles/chair_lift/chair_lift_sprite/chair_lift.tscn" id="2_8cgsm"]
+[ext_resource type="PackedScene" uid="uid://dothsgi44b1ox" path="res://scenes/obstacles/chair_lift/chair_sprites/chair_down.tscn" id="3_s0j7e"]
+[ext_resource type="PackedScene" uid="uid://c7rpua27nqj4i" path="res://scenes/obstacles/chair_lift/chair_sprites/chair_up.tscn" id="4_lf65a"]
+
+[node name="chair_lift" type="Node2D"]
+script = ExtResource("1_y188m")
+
+[node name="chair_lift" parent="." instance=ExtResource("2_8cgsm")]
+
+[node name="chair_down" parent="." instance=ExtResource("3_s0j7e")]
+position = Vector2(-26, 2)
+
+[node name="chair_up" parent="." instance=ExtResource("4_lf65a")]
+position = Vector2(26, -14)

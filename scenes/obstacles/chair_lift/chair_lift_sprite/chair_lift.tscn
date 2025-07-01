@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4gs4ybpb17ou"]
+
+[ext_resource type="Script" uid="uid://blk7arhyo4t8w" path="res://scenes/obstacles/chair_lift/chair_lift_sprite/chair_lift.gd" id="1_uno2w"]
+[ext_resource type="Texture2D" uid="uid://c2tv0i0k2auw8" path="res://assets/sprites/obsticle/SkiFree-Lift.png" id="2_cvwyv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sbqrk"]
+size = Vector2(14, 30.5)
+
+[node name="chair_lift" type="StaticBody2D"]
+script = ExtResource("1_uno2w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cvwyv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16.25)
+shape = SubResource("RectangleShape2D_sbqrk")

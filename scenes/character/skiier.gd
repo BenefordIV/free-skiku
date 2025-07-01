@@ -161,6 +161,9 @@ func handle_collision(col: Node2D) -> void:
 	
 	if col is GG:
 		_miku_crash()
+	
+	if col is CHAIR_LIFT:
+		_miku_crash()
 
 
 func ski_jump(node: Node2D) -> void:

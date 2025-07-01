@@ -63,7 +63,7 @@ func do_gg_flip(j: Node2D) -> void:
 	pass
 
 func handle_collision(col: Node2D) -> void:
-	if col is ROCK || col is TREE:
+	if col is ROCK || col is TREE || col is CHAIR_LIFT:
 		SignalHub.emit_on_gg_crash(self)
 	if col is MIKU:
 		handle_miku_col()

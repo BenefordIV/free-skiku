@@ -1,6 +1,6 @@
 extends Node2D
 
-
+#square of 8,192 pixels
 @export var tile_size := 16.0
 @export var tiles_across := 512
 @export var tiles_down := 512
