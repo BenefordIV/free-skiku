@@ -79,11 +79,6 @@ editor_draw_limits = true
 
 [node name="game_ui" parent="skiier/CanvasLayer" instance=ExtResource("8_3b6yy")]
 
-[node name="SlowdownGenerators" type="Node2D" parent="."]
-script = ExtResource("2_4k12o")
-spawn_scene = ExtResource("8_2qy0d")
-density = 0.5
-
 [connection signal="timeout" from="duke_spawn_timer" to="." method="_on_duke_spawn_timer_timeout"]
 [connection signal="timeout" from="gg_spawn_timer" to="." method="_on_gg_spawn_timer_timeout"]
 [connection signal="timeout" from="link_spawn_timer" to="." method="_on_link_spawn_timer_timeout"]

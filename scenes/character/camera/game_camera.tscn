@@ -8,11 +8,13 @@ size = Vector2(10.3125, 1087.88)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbcvl"]
 size = Vector2(1453, 10.5313)
 
-[node name="game_camera" type="Camera2D" node_paths=PackedStringArray("mark_u", "mark_x_u", "mark_l")]
+[node name="game_camera" type="Camera2D" node_paths=PackedStringArray("mark_u", "mark_x_u", "mark_l", "mark_lift_spawn_min", "mark_lift_spawn_max")]
 script = ExtResource("1_nbcvl")
 mark_u = NodePath("test_mark_u")
 mark_x_u = NodePath("test_mark_u2")
 mark_l = NodePath("test_mark_l")
+mark_lift_spawn_min = NodePath("ski_lift_spawn_min")
+mark_lift_spawn_max = NodePath("ski_lift_spawn_max")
 
 [node name="test_mark_u" type="Marker2D" parent="."]
 position = Vector2(649, 84)
@@ -52,6 +54,12 @@ light_mask = 3
 visibility_layer = 2
 position = Vector2(-636.5, 179.734)
 shape = SubResource("RectangleShape2D_nbcvl")
+
+[node name="ski_lift_spawn_min" type="Marker2D" parent="."]
+position = Vector2(525, 533)
+
+[node name="ski_lift_spawn_max" type="Marker2D" parent="."]
+position = Vector2(-525, 533)
 
 [connection signal="body_entered" from="side_wall_l" to="." method="_on_side_wall_l_body_entered"]
 [connection signal="body_entered" from="side_wall_r" to="." method="_on_side_wall_r_body_entered"]
