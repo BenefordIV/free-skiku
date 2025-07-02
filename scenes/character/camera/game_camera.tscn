@@ -56,10 +56,10 @@ position = Vector2(-636.5, 179.734)
 shape = SubResource("RectangleShape2D_nbcvl")
 
 [node name="ski_lift_spawn_min" type="Marker2D" parent="."]
-position = Vector2(525, 533)
+position = Vector2(525, 695)
 
 [node name="ski_lift_spawn_max" type="Marker2D" parent="."]
-position = Vector2(-525, 533)
+position = Vector2(-525, 695)
 
 [connection signal="body_entered" from="side_wall_l" to="." method="_on_side_wall_l_body_entered"]
 [connection signal="body_entered" from="side_wall_r" to="." method="_on_side_wall_r_body_entered"]

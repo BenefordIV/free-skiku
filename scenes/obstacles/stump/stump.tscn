@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2y1uuo2jl7sg"]
+
+[ext_resource type="Texture2D" uid="uid://ca5psdghnsn8" path="res://assets/sprites/obsticle/SkiFree-Stump.png" id="1_8ot8n"]
+[ext_resource type="Script" uid="uid://bghul8bu6bkuw" path="res://scenes/obstacles/stump/stump.gd" id="1_loeok"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_loeok"]
+size = Vector2(15, 11)
+
+[node name="stump" type="StaticBody2D"]
+script = ExtResource("1_loeok")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8ot8n")
+
+[node name="stump_col" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_loeok")

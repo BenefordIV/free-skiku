@@ -14,12 +14,14 @@ func _enter_tree() -> void:
 	SignalHub.on_gg_jump.connect(disable_jumps)
 	
 func disable_jumps(jump: JUMP) -> void:
+	call_deferred("disable_jump", jump, true)	
+func disable_jump(jump: JUMP, val: bool) -> void:
 	jump.jump_takeoff_point.disabled = true
 	
 func enable_jumps(jump: JUMP) -> void:
+	call_deferred_thread_group("enable_jump", jump, false)
+func enable_jump(jump: JUMP, val: bool) -> void:
 	jump.jump_takeoff_point.disabled = false
-	
-
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is MIKU:

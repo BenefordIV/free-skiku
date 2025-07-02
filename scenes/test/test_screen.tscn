@@ -14,6 +14,13 @@ position = Vector2(512, 445)
 
 [node name="skiier" parent="." instance=ExtResource("2_p07fl")]
 position = Vector2(588, 329)
+free_move = null
+dh_force = null
+running_drag = null
+braking_drag = null
+slowing_drag = null
+side_redirect = null
+mass = null
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("5_nljyg")]
 position = Vector2(490, 385)

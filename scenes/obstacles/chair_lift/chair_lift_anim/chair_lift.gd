@@ -5,7 +5,7 @@ class_name CHAIR_LIFT_ANIM
 @onready var chair_up: StaticBody2D = $chair_up
 @onready var chair_down: StaticBody2D = $chair_down
 
-const _y_movement: float = 100
+const _y_movement: float = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
