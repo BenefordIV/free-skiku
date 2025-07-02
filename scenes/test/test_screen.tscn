@@ -9,20 +9,21 @@
 [node name="Test_Screen" type="Node2D"]
 script = ExtResource("1_7774k")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
-
 [node name="jump" parent="." instance=ExtResource("3_7774k")]
 position = Vector2(512, 445)
 
 [node name="skiier" parent="." instance=ExtResource("2_p07fl")]
 position = Vector2(588, 329)
+free_move = null
+dh_force = null
+running_drag = null
+braking_drag = null
+slowing_drag = null
+side_redirect = null
+mass = null
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("5_nljyg")]
 position = Vector2(490, 385)
 
 [node name="snow_mounds" parent="." instance=ExtResource("4_xsm5j")]
 position = Vector2(470, 671)
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

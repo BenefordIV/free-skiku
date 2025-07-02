@@ -1,42 +1,37 @@
 extends Node2D
 
 var new_link: LINK
+var ski_lift: CHAIR_LIFT_ANIM
 
 const LINK = preload("res://scenes/enemies/link/link.tscn")
+const CHAIR_LIFT_ANIM = preload("res://scenes/obstacles/chair_lift/chair_lift_anim/ski_lift_movement.tscn")
 
 @onready var skiier: MIKU = $skiier
 
+var pos_y: float
+var y_unit_treshold: float = 1000.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pos_y = skiier.global_position.y
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var current_pos_y: float = skiier.global_position.y
+	var y_movement: float = abs(current_pos_y - pos_y)
+	
+	if y_movement >= y_unit_treshold:
+		pos_y = skiier.global_position.y
+		print(pos_y)
+		spawn_ski_lift()
+		
 	pass
 	
 
-func get_viewport_y(flip: bool) -> Vector2:
-	var pos_y: float = randf_range(
-		skiier.camera.mark_u.global_position.y,
-		skiier.camera.mark_l.global_position.y
-	)
-	
-	var pos_x: float = skiier.camera.mark_u.global_position.x
-	if flip:
-		pos_x = skiier.camera.mark_x_u.global_position.x
-		
-	print(pos_x)
-	return Vector2(pos_x, pos_y)
-
-func _on_timer_timeout() -> void:
-	var val = randi_range(1, 2)
-	spawn_link(val)
-
-func spawn_link(val: int) -> void:
-	var flip = val % 2 != 0
-	if new_link == null:
-		new_link = LINK.instantiate()
-		new_link.position = get_viewport_y(flip)
-		new_link.y_origin = new_link.position.y
-		add_child(new_link)
-		SignalHub.emit_flip_link_values(flip)
+func spawn_ski_lift() -> void:
+	if ski_lift == null:
+		ski_lift = CHAIR_LIFT_ANIM.instantiate()
+		var spawn_point = randf_range(skiier.camera.mark_lift_spawn_min.global_position.y, skiier.camera.mark_lift_spawn_max.global_position.y)
+		self.add_child(ski_lift)
+		ski_lift.global_position = Vector2(skiier.camera.mark_lift_spawn_min.position.x, spawn_point)

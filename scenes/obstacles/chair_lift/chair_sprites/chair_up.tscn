@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7rpua27nqj4i"]
+
+[ext_resource type="Texture2D" uid="uid://ccb4xd1nfswwx" path="res://assets/sprites/obsticle/SkiFree-Lift-Bench-Back.png" id="1_882kb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_882kb"]
+size = Vector2(28, 19)
+
+[node name="chair_up" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_882kb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_882kb")

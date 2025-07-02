@@ -2,6 +2,7 @@ extends Node2D
 
 enum GAME_STATE {PLAYING, PAUSED}
 
+const CHAIR_LIFT_ANIM = preload("res://scenes/obstacles/chair_lift/chair_lift_anim/ski_lift_movement.tscn")
 const DUKE = preload("res://scenes/enemies/duke/duke.tscn")
 const MIKU = preload("res://scenes/character/skiier.tscn")
 const GG = preload("res://scenes/enemies/gg/gg_cat.tscn")
@@ -11,9 +12,15 @@ const LINK = preload("res://scenes/enemies/link/link.tscn")
 
 const MARGIN: float = 70.0
 
+#region sprite loaders
 var new_gg: GG
 var new_link: LINK
+var ski_lift: CHAIR_LIFT_ANIM
+#endregion
+
 var _state: GAME_STATE = GAME_STATE.PLAYING
+var pos_y: float
+var y_unit_treshold: float = 1000.0
 
 @onready var camera_2d: Camera2D = $skiier/Camera2D
 
@@ -24,6 +31,7 @@ static func get_vp() -> Rect2:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pos_y = skiier.global_position.y
 	get_tree().paused = false
 	pass
 
@@ -32,7 +40,14 @@ func _enter_tree() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	update_vp()
+	var current_pos_y: float = skiier.global_position.y
+	var y_movement: float = abs(current_pos_y - pos_y)
+	
+	if y_movement >= y_unit_treshold:
+		pos_y = skiier.global_position.y
+		print(pos_y)
+		spawn_ski_lift()
+		
 	pass
 
 func update_vp() -> void:
@@ -109,4 +124,13 @@ func spawn_link(val: int) -> void:
 	new_link.y_origin = new_link.position.y
 	add_child(new_link)
 	SignalHub.emit_flip_link_values(flip)
+#endregion
+
+#region spawn ski-lift
+func spawn_ski_lift() -> void:
+	if ski_lift == null:
+		ski_lift = CHAIR_LIFT_ANIM.instantiate()
+		var spawn_point = randf_range(skiier.camera.mark_lift_spawn_min.global_position.x, skiier.camera.mark_lift_spawn_max.global_position.x)
+		self.add_child(ski_lift)
+		ski_lift.global_position = Vector2(spawn_point, skiier.camera.mark_lift_spawn_min.global_position.y)
 #endregion

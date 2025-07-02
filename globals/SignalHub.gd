@@ -13,6 +13,7 @@ signal on_gg_crash_with_miku
 signal on_flip_link_values
 signal on_miku_flip
 signal on_gg_flip
+signal on_ski_lift_despawn
 
 func emit_on_duke_eat() -> void:
 	on_duke_eat.emit()
@@ -52,3 +53,6 @@ func emit_on_miku_flip(node: Node2D) -> void:
 
 func emit_on_gg_flip(node: Node2D) -> void:
 	on_gg_flip.emit(node)
+
+func emit_on_ski_lift_despawn() -> void:
+	on_ski_lift_despawn.emit()

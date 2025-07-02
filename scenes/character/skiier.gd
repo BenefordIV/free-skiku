@@ -153,13 +153,16 @@ func tree_crash(col: Node2D) -> void:
 #region end
 
 func handle_collision(col: Node2D) -> void:
-	if col is ROCK and _state != SkiState.JUMPED:
+	if (col is ROCK || col is STUMP) and _state != SkiState.JUMPED:
 		rock_crash()
 	
 	if col is TREE:
 		tree_crash(col)
 	
 	if col is GG:
+		_miku_crash()
+	
+	if col is CHAIR_LIFT:
 		_miku_crash()
 
 
@@ -170,6 +173,9 @@ func ski_jump(node: Node2D) -> void:
 	sprite_sheet.play("jump_anim")
 	enable_jump_timer.start()
 	jump_anim.play("jump")
+	call_deferred("emit_on_miku_jump", jump)
+	
+func emit_on_miku_jump(jump: Node2D) -> void:
 	SignalHub.emit_on_miku_jump(jump)
 	
 #region state_change

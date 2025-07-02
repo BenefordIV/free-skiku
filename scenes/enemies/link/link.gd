@@ -36,7 +36,7 @@ func get_offset() -> float:
 func flip_values(flip: bool) -> void:
 	print(flip)
 	if flip:
-		self.velocity.x = 150.0
+		self.velocity.x = -link_speed_x
 		link_sheet.flip_h = true
 	else:
 		self.velocity.x = link_speed_x
