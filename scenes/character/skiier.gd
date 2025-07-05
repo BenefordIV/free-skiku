@@ -148,8 +148,13 @@ func tree_crash(col: Node2D) -> void:
 		sprite_sheet.animation = "full_crash"
 		sprite_sheet.frame = 0
 		sprite_sheet.flip_h = false
-		SignalHub.emit_on_miku_crash()
-		SignalHub.emit_game_over()
+	if _state == SkiState.JUMPED:
+		change_state(SkiState.CRASH)
+		sprite_sheet.animation = "crash_anim"
+		sprite_sheet.frame = 0
+		sprite_sheet.flip_h = false
+	SignalHub.emit_on_miku_crash()
+	SignalHub.emit_game_over()
 #region end
 
 func handle_collision(col: Node2D) -> void:

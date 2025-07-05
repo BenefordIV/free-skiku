@@ -11,6 +11,7 @@ var _can_press: bool = false
 @onready var high_score_label: Label = $high_score_label
 @onready var high_score_label_2: Label = $high_score_label_2
 @onready var paused_label: Label = $paused_label
+@onready var paused_label_2: Label = $paused_label2
 
 
 var _elapsed_time: float = 0.0
@@ -34,15 +35,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _can_press and event.is_action_pressed("restart"):
 		GameManager.load_game_scene()
 		pass
+	elif _can_press and event.is_action_pressed("pause"):
+		GameManager.load_main_screen()
+		pass
 		
 	if _state == GameState.PLAYING and event.is_action_pressed("pause"):
 		paused_label.show()
+		paused_label_2.show()
 		_state = GameState.PAUSED
 		get_tree().paused = true
 		pass
 	
 	elif _state == GameState.PAUSED and event.is_action_pressed("pause"):
 		paused_label.hide()
+		paused_label_2.hide()
 		_state = GameState.PLAYING
 		get_tree().paused = false
 		pass

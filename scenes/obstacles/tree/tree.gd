@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func _enter_tree() -> void:
 	SignalHub.on_miku_jump.connect(_on_miku_jump)
+	SignalHub.on_miku_land.connect(_on_miku_land)
 	SignalHub.on_gg_crash.connect(_delete_gg)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

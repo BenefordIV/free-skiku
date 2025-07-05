@@ -1,29 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2x6x4mqihno3"]
+[gd_scene load_steps=5 format=3 uid="uid://d2x6x4mqihno3"]
 
 [ext_resource type="Script" uid="uid://drfowbeignnmr" path="res://scenes/test/test_screen.gd" id="1_7774k"]
 [ext_resource type="PackedScene" uid="uid://d3kjjy8p2ess7" path="res://scenes/character/skiier.tscn" id="2_p07fl"]
 [ext_resource type="PackedScene" uid="uid://clpor2yqvve5i" path="res://scenes/obstacles/jump/jump.tscn" id="3_7774k"]
-[ext_resource type="PackedScene" uid="uid://cetyoeu3j8q3i" path="res://scenes/obstacles/snow_mound/snow_mounds.tscn" id="4_xsm5j"]
-[ext_resource type="PackedScene" uid="uid://c3ulq6n1c03qv" path="res://scenes/enemies/gg/gg_cat.tscn" id="5_nljyg"]
+[ext_resource type="PackedScene" uid="uid://bg7p4jcwg80vd" path="res://scenes/obstacles/chair_lift/chair_lift_anim/ski_lift_movement.tscn" id="4_xsm5j"]
 
 [node name="Test_Screen" type="Node2D"]
 script = ExtResource("1_7774k")
 
 [node name="jump" parent="." instance=ExtResource("3_7774k")]
-position = Vector2(512, 445)
+position = Vector2(562, 659)
 
 [node name="skiier" parent="." instance=ExtResource("2_p07fl")]
 position = Vector2(588, 329)
-free_move = null
-dh_force = null
-running_drag = null
-braking_drag = null
-slowing_drag = null
-side_redirect = null
-mass = null
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("5_nljyg")]
-position = Vector2(490, 385)
-
-[node name="snow_mounds" parent="." instance=ExtResource("4_xsm5j")]
-position = Vector2(470, 671)
+[node name="chair_lift" parent="." instance=ExtResource("4_xsm5j")]
+position = Vector2(572, 758)

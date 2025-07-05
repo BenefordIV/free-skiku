@@ -12,7 +12,7 @@ texture = ExtResource("1_vebx4")
 [node name="GroundCollision" type="CollisionPolygon2D" parent="."]
 position = Vector2(0.299999, 0.0999985)
 scale = Vector2(0.988281, 0.998047)
-polygon = PackedVector2Array(-11.434, 3.90763, -0.303556, 3.90763, 10.8269, 3.90763, 15.8862, 23.9468, 6, 25, 5, 31, -5, 32, -4, 26, -16, 25)
+polygon = PackedVector2Array(-12.4459, 3.90763, -0.303556, 3.90763, 11.8387, 3.90763, 15.8862, 23.9468, 6.77945, 24.9487, 4.75573, 31.9624, -5, 32, -5.36285, 24.9487, -16, 25)
 
 [node name="AirCollision" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(1, -31, -10, 3, 2.75726, 3, 10, 3)

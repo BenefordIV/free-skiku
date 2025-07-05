@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cwjf356tvqfr5" path="res://scenes/character/camera/game_camera.gd" id="1_nbcvl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b74gk"]
-size = Vector2(10.3125, 1087.88)
+size = Vector2(9.57813, 1123.97)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbcvl"]
-size = Vector2(1453, 10.5313)
+size = Vector2(1976, 11.5316)
 
 [node name="game_camera" type="Camera2D" node_paths=PackedStringArray("mark_u", "mark_x_u", "mark_l", "mark_lift_spawn_min", "mark_lift_spawn_max")]
 script = ExtResource("1_nbcvl")
@@ -17,13 +17,13 @@ mark_lift_spawn_min = NodePath("ski_lift_spawn_min")
 mark_lift_spawn_max = NodePath("ski_lift_spawn_max")
 
 [node name="test_mark_u" type="Marker2D" parent="."]
-position = Vector2(649, 84)
+position = Vector2(967, 84)
 
 [node name="test_mark_u2" type="Marker2D" parent="."]
-position = Vector2(-651, 84)
+position = Vector2(-960, 84)
 
 [node name="test_mark_l" type="Marker2D" parent="."]
-position = Vector2(647, 449)
+position = Vector2(965, 449)
 
 [node name="side_wall_l" type="Area2D" parent="."]
 position = Vector2(-44, 21)
@@ -32,7 +32,7 @@ collision_mask = 2
 [node name="side_wall_l_col" type="CollisionShape2D" parent="side_wall_l"]
 light_mask = 3
 visibility_layer = 2
-position = Vector2(-633, -15)
+position = Vector2(-930.211, -20.015)
 shape = SubResource("RectangleShape2D_b74gk")
 
 [node name="side_wall_r" type="Area2D" parent="."]
@@ -42,7 +42,7 @@ collision_mask = 2
 [node name="side_wall_r_col" type="CollisionShape2D" parent="side_wall_r"]
 light_mask = 3
 visibility_layer = 2
-position = Vector2(-633, -19)
+position = Vector2(-329.422, -32.03)
 shape = SubResource("RectangleShape2D_b74gk")
 
 [node name="top_wall" type="Area2D" parent="."]
@@ -52,7 +52,7 @@ collision_mask = 2
 [node name="top_wall_col" type="CollisionShape2D" parent="top_wall"]
 light_mask = 3
 visibility_layer = 2
-position = Vector2(-636.5, 179.734)
+position = Vector2(-630, 156.234)
 shape = SubResource("RectangleShape2D_nbcvl")
 
 [node name="ski_lift_spawn_min" type="Marker2D" parent="."]

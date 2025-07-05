@@ -45,7 +45,6 @@ func _process(delta: float) -> void:
 	
 	if y_movement >= y_unit_treshold:
 		pos_y = skiier.global_position.y
-		print(pos_y)
 		spawn_ski_lift()
 		
 	pass

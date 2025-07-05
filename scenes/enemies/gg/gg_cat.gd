@@ -15,9 +15,8 @@ var x_origin: float
 var _state: GgState = GgState.SCREEN_LEFT
 
 var x_offset: float = randf_range(50.0, 75.0)
-const y_velocity: float = 225
-const y_velocity_slow: float = 150.0
-const _max_x_velocity: float = 150.0 
+const y_velocity: float = 350
+const y_velocity_slow: float = 350.0
 
 func _ready() -> void:
 	gg_sprite.animation = "gg_snowboard"
@@ -66,6 +65,7 @@ func handle_collision(col: Node2D) -> void:
 	if col is ROCK || col is TREE || col is CHAIR_LIFT || col is STUMP:
 		SignalHub.emit_on_gg_crash(self)
 	if col is MIKU:
+		gg_sprite.animation = "gg_crash"
 		handle_miku_col()
 
 func change_state(new_state: GgState) -> void:
@@ -99,6 +99,7 @@ func do_jump_anim() -> void:
 	
 
 func handle_miku_col() -> void:
+	
 	SignalHub.emit_on_gg_crash_with_miku()
 	SignalHub.emit_game_over()
 

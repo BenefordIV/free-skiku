@@ -1,13 +1,13 @@
 extends Node2D
 
 #square of 8,192 pixels
-@export var tile_size := 16.0
+@export var tile_size := 20.0
 @export var tiles_across := 512
 @export var tiles_down := 512
 @export var camera_node : NodePath
 
 #denotes how many tiles are generated in the Y-Axis
-@export var y_axis_gen_buffer := 2
+@export var y_axis_gen_buffer := 1
 #denotes how many tiles away will be degenerated
 @export var y_axis_degen_buffer := 8
 

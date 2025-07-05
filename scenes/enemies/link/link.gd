@@ -3,7 +3,7 @@ class_name LINK
 
 enum LINK_STATE {LEFT, RIGHT}
 
-@export var link_speed_x: float = -150.0
+@export var link_speed_x: float = -250.0
 @onready var link_sheet: AnimatedSprite2D = $link_sheet
 
 var y_origin: float
