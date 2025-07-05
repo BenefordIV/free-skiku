@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="SkiKu"
-run/main_scene="uid://bnqbcsivotrfm"
+run/main_scene="uid://bo83gvsvoy8y8"
 config/features=PackedStringArray("4.4", "Mobile")
 config/icon="uid://cha7d5helkpkj"
 
@@ -23,9 +23,11 @@ ScoreManager="*res://globals/ScoreManager.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=1024
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
 window/energy_saving/keep_screen_on=false
+mouse_cursor/custom_image="uid://i04fd7ap3k4y"
 
 [input]
 

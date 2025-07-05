@@ -1,7 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7edq1ytsypu2"]
+[gd_scene load_steps=6 format=3 uid="uid://b7edq1ytsypu2"]
 
 [ext_resource type="Script" uid="uid://b8pah11veqpp2" path="res://scenes/game_ui/game_ui.gd" id="1_1i64n"]
 [ext_resource type="FontFile" uid="uid://bm3gsjepunakr" path="res://assets/fonts/gemunu-libre-v8-latin-700.ttf" id="1_sq0em"]
+
+[sub_resource type="Animation" id="Animation_1i64n"]
+resource_name = "pause_pulse"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("paused_label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.129412), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_najyh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("paused_label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cwxn"]
+_data = {
+&"RESET": SubResource("Animation_najyh"),
+&"pause_pulse": SubResource("Animation_1i64n")
+}
 
 [node name="game_ui" type="Control"]
 process_mode = 3
@@ -17,11 +54,14 @@ script = ExtResource("1_1i64n")
 process_mode = 3
 visible = false
 z_index = 2
-layout_mode = 0
-offset_left = 414.0
-offset_top = 120.0
-offset_right = 853.0
-offset_bottom = 355.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -219.5
+offset_right = 219.5
+offset_bottom = 235.0
+grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_sq0em")
 theme_override_font_sizes/font_size = 75
@@ -56,11 +96,14 @@ vertical_alignment = 1
 one_shot = true
 
 [node name="current_score_label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 1099.0
-offset_top = 4.0
-offset_right = 1275.0
-offset_bottom = 37.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -176.0
+offset_top = 38.0
+offset_bottom = 71.0
+grow_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_sq0em")
 theme_override_font_sizes/font_size = 30
@@ -68,11 +111,15 @@ text = "Score:000000"
 
 [node name="high_score_label" type="Label" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 355.0
-offset_top = 550.0
-offset_right = 909.0
-offset_bottom = 793.0
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = 43.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.0862745, 0.219608, 0.376471, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_sq0em")
@@ -81,18 +128,19 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="high_score_label_2" type="Label" parent="."]
-layout_mode = 0
-offset_left = 1043.0
-offset_top = 37.0
-offset_right = 1270.0
-offset_bottom = 70.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -227.0
+offset_bottom = 33.0
+grow_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_sq0em")
 theme_override_font_sizes/font_size = 30
 text = "High Score:000000"
 
 [node name="paused_label" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,14 +148,20 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -113.0
-offset_top = -39.5
+offset_top = -259.5
 offset_right = 113.0
-offset_bottom = 39.5
+offset_bottom = -180.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_sq0em")
 theme_override_font_sizes/font_size = 72
 text = "PAUSED"
+
+[node name="pause_player" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2cwxn")
+}
+autoplay = "pause_pulse"
 
 [connection signal="timeout" from="reset_timer" to="." method="_on_reset_timer_timeout"]

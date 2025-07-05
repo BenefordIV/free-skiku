@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _can_press and event.is_action_pressed("restart"):
-		GameManager.load_game_scene()
+		GameManager.load_main_screen()
 		pass
 		
 	if _state == GameState.PLAYING and event.is_action_pressed("pause"):
