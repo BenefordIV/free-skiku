@@ -53,7 +53,6 @@ camera = NodePath("game_camera")
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -110.5)
 shape = SubResource("RectangleShape2D_ka2rh")
 
 [node name="enable_jump_timer" type="Timer" parent="."]
@@ -71,7 +70,6 @@ libraries = {
 }
 
 [node name="SpriteSheet" type="AnimatedSprite2D" parent="."]
-position = Vector2(5, -111)
 sprite_frames = ExtResource("2_b2blx")
 animation = &"crash_anim"
 
