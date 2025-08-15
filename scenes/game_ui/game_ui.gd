@@ -8,16 +8,17 @@ var _can_press: bool = false
 @onready var press_space_label: Label = $restart_label
 @onready var reset_timer: Timer = $reset_timer
 @onready var current_score_label: Label = $current_score_label
-@onready var high_score_label: Label = $high_score_label
 @onready var high_score_label_2: Label = $high_score_label_2
 @onready var paused_label: Label = $paused_label
 @onready var paused_label_2: Label = $paused_label2
+@onready var link_button: LinkButton = $LinkButton
 
 
 var _elapsed_time: float = 0.0
 var _target_time: float = 2.0
 var _score: float = 0.0
 var _state: GameState
+var _score_to_show_link: float = 1500
 
 func _ready() -> void:
 	_state = GameState.PLAYING
@@ -30,6 +31,11 @@ func _process(delta: float) -> void:
 		_elapsed_time = 0.0
 		_score += 50
 		current_score_label.text = "Score:%06d" % _score
+
+func _input(event: InputEvent) -> void:
+	if  _can_press and event is InputEventScreenTouch && event.is_pressed():
+		GameManager.load_game_scene()
+		pass
 
 func _unhandled_input(event: InputEvent) -> void:
 	if _can_press and event.is_action_pressed("restart"):
@@ -76,10 +82,6 @@ func _on_reset_timer_timeout() -> void:
 func _set_current_score_label(score: float) -> void:
 	current_score_label.text = "Score:%06d" % score
 
-func showHighScore() -> void:
-	if _score > ScoreManager.high_score:
-		ScoreManager.high_score = _score
-		high_score_label.text = "NEW HIGH SCORE!\n%06d " % _score
-	else:
-		high_score_label.text = "HIGH SCORE\n%06d" % ScoreManager.high_score
-	high_score_label.show()
+func showHighScore() -> void:		
+	if _score >= _score_to_show_link:
+		link_button.show()

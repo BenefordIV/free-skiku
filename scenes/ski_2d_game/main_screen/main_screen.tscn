@@ -115,8 +115,8 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -338.5
-offset_bottom = -315.5
+offset_top = -339.0
+offset_bottom = -257.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -137,15 +137,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="miku" type="AnimatedSprite2D" parent="MarginContainer"]
-position = Vector2(960, 647)
+position = Vector2(640, 350)
+scale = Vector2(0.76875, 0.842188)
 sprite_frames = SubResource("SpriteFrames_p75wi")
 animation = &"miku"
 autoplay = "miku"
 frame_progress = 0.125715
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer"]
-position = Vector2(961.75, 540)
-scale = Vector2(2.40438, 1.7)
+position = Vector2(642.624, 358)
+scale = Vector2(1.60344, 1.13125)
 sprite_frames = SubResource("SpriteFrames_tcwnc")
 animation = &"border"
 autoplay = "border"

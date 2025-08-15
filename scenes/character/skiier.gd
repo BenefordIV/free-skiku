@@ -74,11 +74,26 @@ func _physics_process(delta: float) -> void:
 		SignalHub.emit_on_miku_crash()
 		SignalHub.emit_game_over()
 
+
+var dragging = false
 func _input(event:InputEvent) -> void:
 	if _state == SkiState.JUMPED:
 		return
 	if event is InputEventMouseMotion && _state != SkiState.CRASH:
 		self.handle_direction(get_global_mouse_position() - self.global_position)
+		
+	if event is InputEventScreenTouch && _state != SkiState.CRASH:
+		if event.pressed:
+			dragging = true
+		else:
+			dragging = false
+	elif event is InputEventScreenDrag:
+		if dragging:
+			var screen_position = event.position
+			var canvas_transform = get_viewport().get_canvas_transform()
+			var global_position = canvas_transform.affine_inverse() * screen_position
+			handle_direction(global_position - self.global_position)
+
 
 func handle_direction(dir:Vector2) -> void:
 	dir = dir.normalized()

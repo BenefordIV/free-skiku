@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cwjf356tvqfr5" path="res://scenes/character/camera/game_camera.gd" id="1_nbcvl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b74gk"]
-size = Vector2(9.57813, 1123.97)
+size = Vector2(4, 734)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nbcvl"]
-size = Vector2(1976, 11.5316)
+size = Vector2(1294, 9.7658)
 
 [node name="game_camera" type="Camera2D" node_paths=PackedStringArray("mark_u", "mark_x_u", "mark_l", "mark_lift_spawn_min", "mark_lift_spawn_max")]
 script = ExtResource("1_nbcvl")
@@ -17,13 +17,13 @@ mark_lift_spawn_min = NodePath("ski_lift_spawn_min")
 mark_lift_spawn_max = NodePath("ski_lift_spawn_max")
 
 [node name="test_mark_u" type="Marker2D" parent="."]
-position = Vector2(967, 84)
+position = Vector2(647, 84)
 
 [node name="test_mark_u2" type="Marker2D" parent="."]
-position = Vector2(-960, 84)
+position = Vector2(-647, 84)
 
 [node name="test_mark_l" type="Marker2D" parent="."]
-position = Vector2(965, 449)
+position = Vector2(647, 400)
 
 [node name="side_wall_l" type="Area2D" parent="."]
 position = Vector2(-44, 21)
@@ -32,7 +32,7 @@ collision_mask = 2
 [node name="side_wall_l_col" type="CollisionShape2D" parent="side_wall_l"]
 light_mask = 3
 visibility_layer = 2
-position = Vector2(-930.211, -20.015)
+position = Vector2(-597.211, -20.015)
 shape = SubResource("RectangleShape2D_b74gk")
 
 [node name="side_wall_r" type="Area2D" parent="."]
@@ -42,7 +42,7 @@ collision_mask = 2
 [node name="side_wall_r_col" type="CollisionShape2D" parent="side_wall_r"]
 light_mask = 3
 visibility_layer = 2
-position = Vector2(-329.422, -32.03)
+position = Vector2(-666, -31)
 shape = SubResource("RectangleShape2D_b74gk")
 
 [node name="top_wall" type="Area2D" parent="."]
@@ -52,14 +52,14 @@ collision_mask = 2
 [node name="top_wall_col" type="CollisionShape2D" parent="top_wall"]
 light_mask = 3
 visibility_layer = 2
-position = Vector2(-630, 156.234)
+position = Vector2(-633, 344.117)
 shape = SubResource("RectangleShape2D_nbcvl")
 
 [node name="ski_lift_spawn_min" type="Marker2D" parent="."]
-position = Vector2(525, 695)
+position = Vector2(525, 420)
 
 [node name="ski_lift_spawn_max" type="Marker2D" parent="."]
-position = Vector2(-525, 695)
+position = Vector2(-525, 420)
 
 [connection signal="body_entered" from="side_wall_l" to="." method="_on_side_wall_l_body_entered"]
 [connection signal="body_entered" from="side_wall_r" to="." method="_on_side_wall_r_body_entered"]
